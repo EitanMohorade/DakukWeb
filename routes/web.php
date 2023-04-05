@@ -27,7 +27,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-//USUARIOS
+require __DIR__.'/admin.php';
+/* //USUARIOS
 Route::get('/verUsuarios',[UsuarioController::class, 'show'])->name('verUsuarios');
 
 Route::get('agregarUsuario', function () {
@@ -75,4 +76,4 @@ Route::post('/agregarVerCategorias', [CategoriaController::class, 'store'])->nam
 
 Route::get('eliminarCategoria/{id}', [CategoriaController::class, 'destroyC']);
 Route::get('eliminarSubCategoria/{id}', [CategoriaController::class, 'destroySC']);
-Route::get('eliminarSubSubCategoria/{id}', [CategoriaController::class, 'destroySSC']);
+Route::get('eliminarSubSubCategoria/{id}', [CategoriaController::class, 'destroySSC']); */
