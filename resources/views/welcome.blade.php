@@ -1,3 +1,3 @@
 @extends("bootstrap")
-<a href="{{url ('verProductos/')}}"><button class="btn btn-primary">VER PRODUCTOS</button></a>
-<a href="{{url ('verUsuarios/')}}"><button class="btn btn-primary">VER USUARIOS</button></a>
+<a href="{{url ('ViewProducts/')}}"><button class="btn btn-primary">VER productS</button></a>
+<a href="{{url ('ViewUsers/')}}"><button class="btn btn-primary">VER users</button></a>

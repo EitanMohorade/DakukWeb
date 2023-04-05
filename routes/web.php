@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UsuarioController;
-use App\Http\Controllers\ProductosController;
-use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Controller;
 
 
@@ -27,52 +27,52 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
-//USUARIOS
-Route::get('/verUsuarios',[UsuarioController::class, 'show'])->name('verUsuarios');
+//users
+Route::get('/ViewUsers',[UserController::class, 'show'])->name('User.Index');
 
-Route::get('agregarUsuario', function () {
-    return view('Eitan.usuarios.agregarUsuario');
-})-> name('agregarUsuario');;
+Route::get('AddUser', function () {
+    return view('Eitan.users.adduser');
+})-> name('User.Add');;
 
-Route::get('editarUsuario', function () {
-    return view('Eitan.usuarios.editarUsuario');
-})->name('editarUsuarios');;
+Route::get('EditUser', function () {
+    return view('Eitan.users.EditUser');
+})->name('User.Edit');;
 
-Route::get('editarUsuario/{id}', [UsuarioController::class, 'edit']);
-Route::post('actualizarUsuario/{id}', [UsuarioController::class, 'update']);
-Route::get('eliminarUsuario/{id}', [UsuarioController::class, 'destroy']);
+Route::get('EditUser/{id}', [UserController::class, 'edit']);
+Route::post('UpdateUser/{id}', [UserController::class, 'update']);
+Route::get('DestroyUser/{id}', [UserController::class, 'destroy']);
 
-Route::post('/agregarUsuario', [UsuarioController::class, 'store'])-> name('agregarUsuario');
+Route::post('/AddUser', [UserController::class, 'store'])-> name('User.Add');
 
 //
-//PRODUCTOS
-Route::get('/verProductos',[ProductosController::class, 'show']);
+//productS
+Route::get('/ViewProducts',[ProductController::class, 'show']);
 
 
 
-Route::post('/agregarProductos', [ProductosController::class, 'store'])->name('agregarProducto');
+Route::post('/AddProduct', [ProductController::class, 'store'])->name('Product.Add');
 
-Route::get('/agregarProductos', function () {
-    return view('Eitan.productos.agregarProductos');
-})->name('agregarProducto');;
+Route::get('/AddProduct', function () {
+    return view('Eitan.products.addproducts');
+})->name('Product.Add');;
 
-Route::get('/agregarProductos',[ProductosController::class, 'showCategorys']);
-//Route::get('/verProductos',[ProductosController::class, 'showCategorys']);
+Route::get('/AddProduct',[ProductController::class, 'showCategorys']);
+//Route::get('/ViewProducts',[ProductController::class, 'showCategorys']);
 
-Route::get('editarProducto/{id}', [ProductosController::class, 'edit']);
-Route::post('actualizarProducto/{id}', [ProductosController::class, 'update']);
-Route::get('eliminarProducto/{id}', [ProductosController::class, 'destroy']);
+Route::get('EditProduct/{id}', [ProductController::class, 'edit']);
+Route::post('UpdateProduct/{id}', [ProductController::class, 'update']);
+Route::get('DestroyProduct/{id}', [ProductController::class, 'destroy']);
 
-Route::get('editarProducto', function () {
-    return view('Eitan.productos.editarProducto');
-})->name('editarProducto');;
+Route::get('UpdateProduct', function () {
+    return view('Eitan.products.editarproduct');
+})->name('Product.Update');;
 //
-//CATEGORIAS
+//categories
 
-Route::get('/agregarVerCategorias',[CategoriaController::class, 'show'])->name('verCategorias');
+Route::get('/ViewCategories',[CategoryController::class, 'show'])->name('Category.Index');
 
-Route::post('/agregarVerCategorias', [CategoriaController::class, 'store'])->name('agregarCategoria');
+Route::post('/ViewCategories', [CategoryController::class, 'store'])->name('Catehory.Add');
 
-Route::get('eliminarCategoria/{id}', [CategoriaController::class, 'destroyC']);
-Route::get('eliminarSubCategoria/{id}', [CategoriaController::class, 'destroySC']);
-Route::get('eliminarSubSubCategoria/{id}', [CategoriaController::class, 'destroySSC']);
+Route::get('DestroyCategoy/{id}', [CategoryController::class, 'destroyC']);
+Route::get('DestroySubCategoy/{id}', [CategoryController::class, 'destroySC']);
+Route::get('DestroySubSubCategoy/{id}', [CategoryController::class, 'destroySSC']);
