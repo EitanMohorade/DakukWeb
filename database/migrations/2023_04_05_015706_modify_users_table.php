@@ -13,12 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sub_categorias', function (Blueprint $table) {
-            $table->id();
-            $table->string('Nombre');
-            $table->string('Categoria');
-            $table->timestamps();
-        });
+        Schema::table(
+            'users',
+            function (Blueprint $table) {
+                $table->unsignedInteger('old_id')->after('id')->nullable();
+                $table->string('surname')->after('name');
+                $table->string('phone', 50)->after('password')->nullable();
+                $table->softDeletes();
+            }
+        );
     }
 
     /**
@@ -28,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sub_categorias');
+        //
     }
 };
