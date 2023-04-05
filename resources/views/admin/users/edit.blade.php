@@ -17,8 +17,8 @@
     <label for="validationCustom02" class="form-label">EMAIL</label>
     <input type="text" class="form-control" name="Email" id="Email" value="{{$user->Email}}" required>
 
-    <label for="validationCustom02" class="form-label">CONTRASEñA</label>
-    <input type="text" class="form-control" name="Contraseña" id="contraseña" value="{{$user->Contraseña}}" required>
+    <label for="validationCustom02" class="form-label">password</label>
+    <input type="text" class="form-control" name="password" id="password" value="{{$user->password}}" required>
 
   <button class="btn btn-primary" type="submit">Submit form</button>
   </div>

@@ -28,14 +28,14 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 //users
-Route::get('/ViewUsers',[UserController::class, 'show'])->name('User.Index');
+Route::get('/ViewUsers',[UserController::class, 'index'])->name('User.Index');
 
 Route::get('AddUser', function () {
-    return view('Eitan.users.adduser');
+    return view('admin.users.create');
 })-> name('User.Add');;
 
 Route::get('EditUser', function () {
-    return view('Eitan.users.EditUser');
+    return view('admin.users.edit');
 })->name('User.Edit');;
 
 Route::get('EditUser/{id}', [UserController::class, 'edit']);
@@ -46,14 +46,14 @@ Route::post('/AddUser', [UserController::class, 'store'])-> name('User.Add');
 
 //
 //productS
-Route::get('/ViewProducts',[ProductController::class, 'show']);
+Route::get('/ViewProducts',[ProductController::class, 'index']);
 
 
 
 Route::post('/AddProduct', [ProductController::class, 'store'])->name('Product.Add');
 
 Route::get('/AddProduct', function () {
-    return view('Eitan.products.addproducts');
+    return view('admin.products.create');
 })->name('Product.Add');;
 
 Route::get('/AddProduct',[ProductController::class, 'showCategorys']);
@@ -64,14 +64,14 @@ Route::post('UpdateProduct/{id}', [ProductController::class, 'update']);
 Route::get('DestroyProduct/{id}', [ProductController::class, 'destroy']);
 
 Route::get('UpdateProduct', function () {
-    return view('Eitan.products.editarproduct');
+    return view('admin.products.edit');
 })->name('Product.Update');;
 //
 //categories
 
-Route::get('/ViewCategories',[CategoryController::class, 'show'])->name('Category.Index');
+Route::get('/ViewCategories',[CategoryController::class, 'index'])->name('Category.Index');
 
-Route::post('/ViewCategories', [CategoryController::class, 'store'])->name('Catehory.Add');
+Route::post('/ViewCategories', [CategoryController::class, 'store'])->name('Category.Add');
 
 Route::get('DestroyCategoy/{id}', [CategoryController::class, 'destroyC']);
 Route::get('DestroySubCategoy/{id}', [CategoryController::class, 'destroySC']);
