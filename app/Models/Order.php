@@ -17,9 +17,8 @@ class Order extends Model
      */
     protected $fillable = [
         'user_id',
-        'amout',
-        'products_qty',
         'status',
+        'comments',
     ];
 
     public function user(){

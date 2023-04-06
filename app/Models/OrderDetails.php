@@ -19,7 +19,7 @@ class OrderDetails extends Model
         'order_id',
         'product_id',
         'quantity',
-        'charge',
+        'amount',
     ];
 
     public function order() {
