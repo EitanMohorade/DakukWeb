@@ -26,13 +26,21 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::controller(ProductController::class)->group(function () {
+    Route::get('/products', 'index')->name('products.index');
+    Route::get('/products/{products}', 'show')->name('products.show');
+});
+
+Route::controller(CategoryController::class)->group(function () {
+    Route::get('/categories', 'index')->name('categories.index');
+    Route::get('/categories/{category}', 'show')->name('categories.show');
+});
+
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
+require __DIR__.'/customer.php';
 //USUARIOS
-Route::get('/verUsuarios',[UsuarioController::class, 'show'])->name('verUsuarios');
-//users
-Route::get('/ViewUsers',[UserController::class, 'index'])->name('User.Index');
-
+/* 
 Route::get('AddUser', function () {
     return view('admin.users.create');
 })-> name('User.Add');;
@@ -78,4 +86,4 @@ Route::post('/ViewCategories', [CategoryController::class, 'store'])->name('Cate
 
 Route::get('DestroyCategoy/{id}', [CategoryController::class, 'destroyC']);
 Route::get('DestroySubCategoy/{id}', [CategoryController::class, 'destroySC']);
-Route::get('DestroySubSubCategoy/{id}', [CategoryController::class, 'destroySSC']);
+Route::get('DestroySubSubCategoy/{id}', [CategoryController::class, 'destroySSC']); */
