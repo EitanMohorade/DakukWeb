@@ -29,18 +29,34 @@ Route::get('/dashboard', function () {
 Route::controller(ProductController::class)->group(function () {
     Route::get('/products', 'index')->name('products.index');
     Route::get('/products/{products}', 'show')->name('products.show');
+
+    Route::get('/products/{product}/edit', 'edit')->name('products.edit');
+    Route::put('/products/{product}', 'update')->name('products.update');
+
+    Route::delete('/products/{product}', 'destroy')->name('products.destroy');
+
+    Route::post('/products', 'store')->name('products.store');
+    Route::post('/products/create', 'create')->name('products.create');
 });
 
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/categories', 'index')->name('categories.index');
     Route::get('/categories/{category}', 'show')->name('categories.show');
+
+    Route::get('/categories/{category}/edit', 'edit')->name('categories.edit');
+    Route::put('/categories/{category}', 'update')->name('categories.update');
+
+    Route::delete('/categories/{category}', 'destroy')->name('categories.destroy');
+
+    Route::post('/categories', 'store')->name('categories.store');
+    Route::post('/categories/create', 'create')->name('categories.create');
 });
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/customer.php';
 //USUARIOS
-/* 
+/*
 Route::get('AddUser', function () {
     return view('admin.users.create');
 })-> name('User.Add');;
