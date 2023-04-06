@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class UserSeeder extends Seeder
 {
@@ -17,7 +19,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
+        $user = User::create([
             'name' => 'Francisco',
             'surname' => 'Trujillo',
             'email' => 'dakuk@admin.com',
@@ -25,8 +27,16 @@ class UserSeeder extends Seeder
             'password' => Hash::make('1234'), //password
             'phone' => fake()->phoneNumber(),
             'remember_token' => Str::random(10),
-        ]);//->assignRole('admin');
+        ]);
+        
+        $user->assignRole('admin');
 
-        User::factory(5)->create();
+        User::factory(5)->create()->each(function ($user) {
+            $user->assignRole('customer');
+        });
+
+        User::factory(5)->trashed()->create()->each(function ($user) {
+            $user->assignRole('customer');
+        });
     }
 }

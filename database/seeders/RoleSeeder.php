@@ -17,28 +17,26 @@ class RoleSeeder extends Seeder
     public function run()
     {
         $adminRole = Role::create(['name' => 'admin']);
-        $clientRole = Role::create(['name' => 'client']);
-        
-        Permission::create(['name' => 'index']);
+        $customerRole = Role::create(['name' => 'customer']);
 
         Permission::create(['name' => 'users.index'])->assignRole($adminRole);
-        Permission::create(['name' => 'users.show'])->syncRoles([$adminRole, $clientRole]);
-        Permission::create(['name' => 'users.new'])->syncRoles([$adminRole, $clientRole]);
-        Permission::create(['name' => 'users.store'])->syncRoles([$adminRole, $clientRole]);
-        Permission::create(['name' => 'users.edit'])->syncRoles([$adminRole, $clientRole]);
-        Permission::create(['name' => 'users.update'])->syncRoles([$adminRole, $clientRole]);
-        Permission::create(['name' => 'users.delete'])->syncRoles([$adminRole, $clientRole]);
+        Permission::create(['name' => 'users.show'])->assignRole($adminRole);
+        Permission::create(['name' => 'users.new'])->assignRole($adminRole);
+        Permission::create(['name' => 'users.store'])->assignRole($adminRole);
+        Permission::create(['name' => 'users.edit'])->assignRole($adminRole);
+        Permission::create(['name' => 'users.update'])->assignRole($adminRole);
+        Permission::create(['name' => 'users.delete'])->assignRole($adminRole);
 
-        Permission::create(['name' => 'products.index'])->syncRoles([$adminRole, $clientRole]);
-        Permission::create(['name' => 'products.show'])->syncRoles([$adminRole, $clientRole]);
+        Permission::create(['name' => 'products.index'])->syncRoles([$adminRole, $customerRole]);
+        Permission::create(['name' => 'products.show'])->syncRoles([$adminRole, $customerRole]);
         Permission::create(['name' => 'products.new'])->assignRole($adminRole);
         Permission::create(['name' => 'products.store'])->assignRole($adminRole);
         Permission::create(['name' => 'products.edit'])->assignRole($adminRole);
         Permission::create(['name' => 'products.update'])->assignRole($adminRole);
         Permission::create(['name' => 'products.delete'])->assignRole($adminRole);
         
-        Permission::create(['name' => 'categories.index'])->syncRoles([$adminRole, $clientRole]);
-        Permission::create(['name' => 'categories.show'])->syncRoles([$adminRole, $clientRole]);
+        Permission::create(['name' => 'categories.index'])->syncRoles([$adminRole, $customerRole]);
+        Permission::create(['name' => 'categories.show'])->syncRoles([$adminRole, $customerRole]);
         Permission::create(['name' => 'categories.new'])->assignRole($adminRole);
         Permission::create(['name' => 'categories.store'])->assignRole($adminRole);
         Permission::create(['name' => 'categories.edit'])->assignRole($adminRole);
