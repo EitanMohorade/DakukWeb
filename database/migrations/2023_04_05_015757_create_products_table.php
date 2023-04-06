@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('image');
             $table->text('description')->nullable();
             $table->smallInteger('stock');
-            $table->integer('price');
+            $table->float('price', 8, 2);
             $table->timestamps();
             $table->softDeletes();
         });

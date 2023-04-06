@@ -44,7 +44,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('admin.profile.edit');
+        return Redirect::route('customer.profile.edit');
     }
 
     /**
