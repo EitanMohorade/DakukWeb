@@ -56,8 +56,8 @@ class CategoryController extends Controller
   public function store(Request $request)
   {
     $request->validate([
-      'name' => 'required', //|alpha_num:ascii|min:3|max:255
-      'category_id' => 'required'
+      'name' => 'required',
+      //'category_id' => 'required'
     ]);
 
     $category = Category::create([
@@ -65,7 +65,7 @@ class CategoryController extends Controller
       'category_id' => $request->category_id,
     ]);
 
-    return to_route('categories.index');
+    return redirect()->route('categories.index')->with('success', 'La categoria se ha agregado con exito');
   }
 
   /**
