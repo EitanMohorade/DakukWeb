@@ -24,6 +24,7 @@
                         <button type="submit">Eliminar</button>
                     </form>
                     <a href="{{ route('categories.edit', $category->id  ) }}"><button class="btn btn-primary">edit</button>
+                    <a href="{{ route('categories.show', $category->id  ) }}"><button class="btn btn-primary">show</button>
                 </td>
             </tr>
         @endforeach

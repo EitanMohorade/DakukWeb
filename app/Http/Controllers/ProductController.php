@@ -66,9 +66,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show($id)
     {
-        $id = $request->get('id');
         $product = Product::findOrFail($id);
         return view('admin.products.show', ['product' => $product]);
     }

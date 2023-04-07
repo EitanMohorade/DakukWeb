@@ -42,6 +42,7 @@
                             <button type="submit">Eliminar</button>
                         </form>
                         <a href="{{route ('products.edit', $product->id)}}" title="edit"><button class="btn btn-primary">edit</button>
+                        <a href="{{route ('products.show', $product->id)}}" title="show"><button class="btn btn-primary">show</button>
                     </td>
             </tr>
             @endforeach

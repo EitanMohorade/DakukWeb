@@ -25,11 +25,10 @@ class CategoryController extends Controller
    * @param  \Illuminate\Http\Request $request
    * @return \Illuminate\Http\Response
    */
-  public function show(Request $request)
+  public function show($id)
   {
-    $id = $request->get('id');
     $category = Category::findOrFail($id);
-    return view('admin.products.show', [
+    return view('admin.categories.show', [
       "category" => $category,
     ]);
   }
