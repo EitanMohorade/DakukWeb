@@ -3,7 +3,7 @@
     <a href="{{url ('/')}}"><button class="btn btn-primary">HOME</button></a>
     <a href="{{ route('categories.index') }}"><button class="btn btn-primary">categories</button></a>
     <div class="big-padding" text-center blue-grey>
-        <h1>VER productS</h1>
+        <h1>products for admins</h1>
     </div>
     <a href="{{route('products.create')}}"><button class="btn btn-primary">add</button></a>
     <form action="{{ route('products.destroy', ['product' => 'all']) }}" method="POST">
@@ -13,6 +13,10 @@
     </form>
     <div class="conteiner">
     <table class="table table-bordered">
+        <form action="{{ route('products.search') }}" method="GET" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" aria-label="Buscar" name="query">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
         <form>
         </form>
             <tr>

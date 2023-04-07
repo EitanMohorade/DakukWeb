@@ -29,6 +29,7 @@ Route::get('/dashboard', function () {
 Route::controller(ProductController::class)->group(function () {
     Route::get('/products', 'index')->name('products.index');
     Route::get('/products/{product}', 'show')->name('products.show');
+    Route::get('/searchProducts', 'search')->name('products.search');
 
     Route::get('/products/{product}/edit', 'edit')->name('products.edit');
     Route::put('/products/{product}', 'update')->name('products.update');
@@ -42,6 +43,7 @@ Route::controller(ProductController::class)->group(function () {
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/categories', 'index')->name('categories.index');
     Route::get('/categories/{category}', 'show')->name('categories.show');
+    Route::get('/searchCategories', 'search')->name('categories.search');
 
     Route::get('/categories/{category}/edit', 'edit')->name('categories.edit');
     Route::put('/categories/{category}', 'update')->name('categories.update');

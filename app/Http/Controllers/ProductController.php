@@ -68,10 +68,22 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        return view('admin.products.show', ['product' => $product]);
+        $products = Product::findOrFail($id);
+        return view('admin.products.show', ['products' => $products]);
     }
+    /**
+     * Search an specific register.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $products = Product::where('name', 'like', "%$query%")->get();
 
+        return view('admin.products.index', ['products' => $products]);
+    }
     /**
      * Show the form for editing the specified resource.
      *

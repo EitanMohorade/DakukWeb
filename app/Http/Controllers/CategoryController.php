@@ -32,7 +32,19 @@ class CategoryController extends Controller
       "category" => $category,
     ]);
   }
+    /**
+     * Search an specific register.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $categories = Category::where('name', 'like', "%$query%")->get();
 
+        return view('admin.categories.index', ['categories' => $categories]);
+    }
   /**
    * Store a newly created resource in storage.
    *

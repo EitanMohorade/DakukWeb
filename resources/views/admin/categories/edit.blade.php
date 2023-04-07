@@ -2,7 +2,7 @@
 <body>
             <!-- EDITAR DATOS A LA BD -->
             <div class="big-padding" text-center blue-grey>
-              <h1>EDITAR categories</h1>
+              <h1>edit categories</h1>
             </div>
             <a href="{{route ('categories.index')}}"><button class="btn btn-primary">VER</button></a>
             <form action="{{ route('categories.update', ['category' => $category->id]) }}" method="POST">

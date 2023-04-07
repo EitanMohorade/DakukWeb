@@ -2,7 +2,7 @@
 <body>
             <!-- EDITAR DATOS A LA BD -->
             <div class="big-padding" text-center blue-grey>
-              <h1>EDITAR productos</h1>
+              <h1>edit productos</h1>
             </div>
             <a href="{{route ('products.index')}}"><button class="btn btn-primary">VER</button></a>
             <form action="{{ route('products.update', ['product' => $product->id]) }}" method="POST">
