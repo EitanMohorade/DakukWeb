@@ -28,10 +28,10 @@ Route::get('/dashboard', function () {
 
 Route::controller(ProductController::class)->group(function () {
     Route::get('/products', 'index')->name('products.index');
-    Route::get('/products/{id}', 'show')->name('products.show');
+    Route::get('/products/{product}', 'show')->name('products.show');
 
-    Route::get('/products/{id}/edit', 'edit')->name('products.edit');
-    Route::put('/products/{id}', 'update')->name('products.update');
+    Route::get('/products/{product}/edit', 'edit')->name('products.edit');
+    Route::put('/products/{product}', 'update')->name('products.update');
 
     Route::delete('/products/{product}', 'destroy')->name('products.destroy');
 
@@ -41,12 +41,12 @@ Route::controller(ProductController::class)->group(function () {
 
 Route::controller(CategoryController::class)->group(function () {
     Route::get('/categories', 'index')->name('categories.index');
-    Route::get('/categories/{id}', 'show')->name('categories.show');
+    Route::get('/categories/{category}', 'show')->name('categories.show');
 
-    Route::get('/categories/{id}/edit', 'edit')->name('categories.edit');
-    Route::put('/categories/{id}', 'update')->name('categories.update');
+    Route::get('/categories/{category}/edit', 'edit')->name('categories.edit');
+    Route::put('/categories/{category}', 'update')->name('categories.update');
 
-    Route::delete('/categories/{id}', 'destroy')->name('categories.destroy');
+    Route::delete('/categories/{category}', 'destroy')->name('categories.destroy');
 
     Route::get('/addCategories', 'create')->name('categories.create');
     Route::post('/categories', 'store')->name('categories.store');

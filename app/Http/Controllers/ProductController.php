@@ -79,9 +79,8 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        $id = $request->get('id');
         $product = Product::findOrFail($id);
         return view('admin.products.edit', ['product' => $product]);
     }
@@ -93,7 +92,7 @@ class ProductController extends Controller
      * @param  string $id
      * @return \Illuminate\Http\Response
      */
-    public function update($request, $id)
+    public function update(Request $request, $id)
     {
         $product = Product::findOrFail($id);
         $product->update($request->all());
@@ -109,8 +108,11 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-        $product->delete();
-
+        if ($id == 'all') {
+            $product->update(['deleted_at' => now()]);
+        }else{
+            $product->delete();
+        }
         return to_route('products.index');
     }
 }

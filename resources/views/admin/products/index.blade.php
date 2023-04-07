@@ -1,11 +1,16 @@
 @extends("bootstrap")
     <!-- VER DATOS DE BD -->
     <a href="{{url ('/')}}"><button class="btn btn-primary">HOME</button></a>
-    <a href="{{url ('/addVercategories')}}"><button class="btn btn-primary">categories</button></a>
+    <a href="{{ route('categories.index') }}"><button class="btn btn-primary">categories</button></a>
     <div class="big-padding" text-center blue-grey>
         <h1>VER productS</h1>
     </div>
     <a href="{{route('products.create')}}"><button class="btn btn-primary">add</button></a>
+    <form action="{{ route('products.destroy', ['product' => 'all']) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger">Eliminar todos los datos</button>
+    </form>
     <div class="conteiner">
     <table class="table table-bordered">
         <form>
@@ -36,7 +41,7 @@
                             @method('DELETE')
                             <button type="submit">Eliminar</button>
                         </form>
-                        <a href="{{url ('eliminarproduct/'.$product->id)}}" title="Eliminar"><button class="btn btn-primary">eliminar</button>
+                        <a href="{{route ('products.edit', $product->id)}}" title="edit"><button class="btn btn-primary">edit</button>
                     </td>
             </tr>
             @endforeach
