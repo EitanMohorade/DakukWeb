@@ -25,7 +25,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $products = Product::all();
+        return view('admin.products.create', ['products' => $products]);
     }
 
     /**
@@ -50,7 +51,7 @@ class ProductController extends Controller
         $imagePath = $request->file('image')->store('storage', 'public'); // Saving the image path
         $products = Product::create([
             'name' => $request->name,
-            'category_id' => 1,
+            //'category_id' => 1,
             'description' => $request->description,
             'price' => $request->price,
             'stock' => $request->stock,
