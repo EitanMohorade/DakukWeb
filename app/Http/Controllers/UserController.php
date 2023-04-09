@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class UserController extends Controller
 {
@@ -13,7 +12,7 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         /* $status = $request->get("status");
         switch ($status) {
@@ -34,8 +33,12 @@ class UserController extends Controller
             $query->where('name', 'LIKE', "%{$term}%")->orWhere('surname', 'LIKE', "%{$term}%")->orWhere('email', 'LIKE', "%{$term}%");
         })->get(); */
 
+        $search = $request->get('search');
+
+        $users = User::withTrashed()->get();
+
         return view('admin.users.index', [
-            "users" => User::all(),
+            "users" => $users,
             //"status" => "all",
         ]);
     }
@@ -127,7 +130,4 @@ class UserController extends Controller
 
         return to_route('users.index');
     }
-    //
-
-    //
 }
