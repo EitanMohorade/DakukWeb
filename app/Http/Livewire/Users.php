@@ -15,6 +15,8 @@ class Users extends Component
     public $search = '';
     public function render()
     {
+        sleep(1);
+
         return view('livewire.users', ['users' => User::search($this->search, function ($query) {
             $query->where('id', '!=', auth()->id());
         })->withTrashed()->paginate(15)]);

@@ -1,27 +1,21 @@
-<div class="relative flex flex-col min-w-0 break-words bg-sky-200 w-full mb-6 shadow-lg rounded ">
+<div class="relative flex flex-col min-w-0 break-words w-full mb-6">
     <div class="rounded-t mb-0 px-4 py-3 border-0">
-        <div class="flex flex-wrap items-center">
-            <div class="relative w-full px-4 max-w-full flex-grow flex-1">
-{{--                 <h3 class="font-semibold text-lg text-blueGray-700">Usuarios</h3> --}}
-            </div>
-            <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                <input type="text" placeholder="Buscar..." wire:model="search" class="border-0 rounded-lg">
-            </div>
+        <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+            <input type="text" placeholder="Buscar..." wire:model="search" class="border-0 rounded-lg w-1/3">
         </div>
     </div>
-
-    <div class="block w-full overflow-x-auto rounded-t-xl">
-        <x-table.table :headers="['ID', 'Nombre', 'Apellido', 'Email', 'Estado']">
-            @if (!$users->isEmpty())
+    @if (!$users->isEmpty())
+    <div class="block w-full overflow-x-auto rounded-t-xl bg-sky-100 shadow-lg">
+            <x-table.table :headers="['ID', 'Nombre', 'Apellido', 'Email', 'Estado']">
                 @foreach ($users as $user)
-                    <tr class="odd:bg-white even:bg-gray-100">
+                    <tr class="odd:bg-white even:bg-gray-100" wire:loading.class="opacity-75">
                         <x-table.cell>{{ $user->id }}</x-table.cell>
                         <x-table.cell>{{ $user->name }}</x-table.cell>
                         <x-table.cell>{{ $user->surname }}</x-table.cell>
                         <x-table.cell>{{ $user->email }}</x-table.cell>
                         <x-table.cell>
                             <span
-                                class="inline-flex items-center bg-{{ $user->status_color }}-100 text-{{ $user->status_color }}-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full">
+                                class="inline-flex items-center bg-{{ $user->status_color }}-100 text-{{ $user->status_color }}-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
                                 <span class="w-2 h-2 mr-1 bg-{{ $user->status_color }}-500 rounded-full"></span>
                                 {{ $user->deleted_at ? 'Inactivo' : 'Activo' }}
                             </span>
@@ -44,15 +38,15 @@
                         </x-table.cell>
                     </tr>
                 @endforeach
-            @else
-                <td class="border-t-0
-        px-6 align-center border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                    No se han encontrado usuarios
-                </td>
-            @endif
-        </x-table.table>
+            </x-table.table>
     </div>
-    <div class="p-4">
+    <div class="p-4 bg-sky-100">
         {{ $users->links() }}
     </div>
+@else
+    <div class="w-full h-52 bg-white text-center p-4 flex align-center justify-center items-center space-x-3 text-xl text-gray-500 rounded-xl shadow-md">
+        <i class="fa-solid fa-heart-crack fa-2xl"></i>
+        <span>Sin resultados.</span> 
+    </div>
+    @endif
 </div>

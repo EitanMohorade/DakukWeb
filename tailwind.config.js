@@ -18,6 +18,7 @@ module.exports = {
     },
 
     safelist: [
+        'text-left',
         'bg-red-100',
         'bg-green-100',
         'text-red-800',
