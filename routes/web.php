@@ -19,8 +19,8 @@ use App\Http\Controllers\Controller;
 */
 
 Route::get('/', function () {
-    return view('index')->name('home');
-});
+    return view('index');
+})->name('home');
 
 /* Route::controller(ProductController::class)->group(function () {
     Route::get('/products', 'index')->name('products.index');
