@@ -45,7 +45,7 @@
     </div>
 @else
     <div class="w-full h-52 bg-white text-center p-4 flex align-center justify-center items-center space-x-3 text-xl text-gray-500 rounded-xl shadow-md">
-        <i class="fa-solid fa-heart-crack fa-2xl"></i>
+        <x-heroicon-o-information-circle class="w-10 h-10 text-gray-500"/>
         <span>Sin resultados.</span> 
     </div>
     @endif
