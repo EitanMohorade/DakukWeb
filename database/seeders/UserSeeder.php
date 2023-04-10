@@ -31,11 +31,11 @@ class UserSeeder extends Seeder
         
         $user->assignRole('admin');
 
-        User::factory(5)->create()->each(function ($user) {
+        User::factory(10)->create()->each(function ($user) {
             $user->assignRole('customer');
         });
 
-        User::factory(5)->trashed()->create()->each(function ($user) {
+        User::factory(10)->trashed()->create()->each(function ($user) {
             $user->assignRole('customer');
         });
     }
