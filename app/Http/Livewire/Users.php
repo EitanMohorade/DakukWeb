@@ -4,21 +4,16 @@ namespace App\Http\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
-class Users extends Component   
+class Users extends Component
 {
+    use WithPagination;
+
     public $search = '';
-    public $users;
     public function render()
     {
-
-        if(empty($this->search)) {
-            $this->users = User::paginate(25);
-        }
-        else {
-            $this->users = User::search($this->search)->get();
-        }
-
-        return view('livewire.users');
+        return view('livewire.users', ['users' => User::search($this->search)->withTrashed()->paginate(15)]);
     }
 }

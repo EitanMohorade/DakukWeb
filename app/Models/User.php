@@ -3,18 +3,15 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Scout\Searchable;
 use Laravel\Scout\Attributes\SearchUsingPrefix;
 use Spatie\Permission\Traits\HasRoles;
-
-use function PHPUnit\Framework\isNull;
 
 class User extends Authenticatable
 {
@@ -50,6 +47,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'deleted_at' => 'datetime',
     ];
 
     public function orders()
@@ -76,7 +74,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function getStatusColorAttribute() {
+    public function getStatusColorAttribute()
+    {
         return $this->deleted_at ? 'red' : 'green';
     }
 }

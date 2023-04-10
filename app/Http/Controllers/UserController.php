@@ -33,14 +33,9 @@ class UserController extends Controller
             $query->where('name', 'LIKE', "%{$term}%")->orWhere('surname', 'LIKE', "%{$term}%")->orWhere('email', 'LIKE', "%{$term}%");
         })->get(); */
 
-        $search = $request->get('search');
+        //$search = $request->get('search');
 
-        $users = User::withTrashed()->get();
-
-        return view('admin.users.index', [
-            "users" => $users,
-            //"status" => "all",
-        ]);
+        return view('admin.users.index');
     }
 
     /**
