@@ -1,9 +1,11 @@
-@extends("bootstrap")
-<body>
-            <!-- EDITAR DATOS A LA BD -->
-            <div class="big-padding" text-center blue-grey>
-              <h1>edit productos</h1>
-            </div>
+<x-app-layout>
+    <link rel="stylesheet"
+        href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Apartado de edicion') }}
+        </h2>
+    </x-slot>
             <a href="{{route ('products.index')}}"><button class="btn btn-primary">VER</button></a>
             <form action="{{ route('products.update', ['product' => $product->id]) }}" method="POST">
                 @csrf
@@ -27,4 +29,4 @@
                 <button type="submit" class="btn btn-primary">Guardar cambios</button>
             </form>
 
-</body>
+</x-app-layout>

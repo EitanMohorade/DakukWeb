@@ -1,10 +1,12 @@
-@extends("bootstrap")
-<body>
-            <!-- add DATOS A LA BD -->
-            <div class="big-padding" text-center blue-grey>
-              <h1>add product</h1>
-            </div>
-            <a href="{{route ('products.index')}}"><button class="btn btn-primary">VER</button></a>
+<x-app-layout>
+    <link rel="stylesheet"
+        href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Añadir Producto') }}
+        </h2>
+    </x-slot>
+
 <form class="row g-3 needs-validation" action="{{route('products.store')}}" method="POST" enctype="multipart/form-data" novalidate>
     @csrf
 
@@ -28,4 +30,4 @@
   </div>
 </form>
 
-</body>
+</x-app-layout>

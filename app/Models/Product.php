@@ -37,7 +37,7 @@ class Product extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
-    #[SearchUsingPrefix(['id', 'description', 'name', 'stock'])]
+    #[SearchUsingPrefix(['id', 'description', 'name', 'stock', 'image'])]
     public function toSearchableArray(): array
     {
         // Customize the data array...
@@ -46,6 +46,7 @@ class Product extends Model
             "name" => $this->name,
             "description" => $this->description,
             "stock" => $this->stock,
+            "image" => $this->image,
             "deleted_at" => $this->deleted_at,
         ];
     }

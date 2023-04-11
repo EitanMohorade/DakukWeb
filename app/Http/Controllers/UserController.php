@@ -118,11 +118,13 @@ class UserController extends Controller
      * @param  string $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function restore($id)
     {
-        $users = User::find($id);
-        $users->delete();
-
+        if (User::withTrashed()->find($id)->trashed()) {
+            User::withTrashed()->find($id)->restore();
+        }else{
+            User::find($id)->delete();
+        }
         return to_route('users.index');
     }
 }

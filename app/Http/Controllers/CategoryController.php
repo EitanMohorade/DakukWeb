@@ -112,12 +112,13 @@ class CategoryController extends Controller
    * @param  category_id $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
+  public function restore($id)
   {
-    $category = Category::find($id);
-
-    $category->delete();
-
-    return to_route('categories.index');
+      if (Category::withTrashed()->find($id)->trashed()) {
+        Category::withTrashed()->find($id)->restore();
+      }else{
+        Category::find($id)->delete();
+      }
+      return to_route('categories.index');
   }
 }

@@ -34,5 +34,20 @@ class Category extends Model
     public function categories(){
         return $this->hasMany(Category::class);
     }
+    #[SearchUsingPrefix(['id', 'category_id', 'name'])]
+    public function toSearchableArray(): array
+    {
+        // Customize the data array...
+        return [
+            "id" => $this->id,
+            "name" => $this->name,
+            "category_id" => $this->category_id,
+            "deleted_at" => $this->deleted_at,
+        ];
+    }
 
+    public function getStatusColorAttribute()
+    {
+        return $this->deleted_at ? 'red' : 'green';
+    }
 }

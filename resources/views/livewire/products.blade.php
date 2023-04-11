@@ -1,4 +1,7 @@
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6">
+    <a href="{{route('products.create')}}"
+        class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+        title="añadir">Añadir</a>
     <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
             <input type="text" placeholder="Buscar..." wire:model="search" class="border-0 rounded-lg w-1/3">
@@ -11,6 +14,7 @@
                 <x-table.header :align="'left'" sortable wire:click="sortBy('name')" :direction="$sortField == 'name' ? $sortDirection : null" value="nombre">Nombre</x-table.header>
                 <x-table.header :align="'left'" sortable wire:click="sortBy('description')" :direction="$sortField == 'description' ? $sortDirection : null" value="descripcion">Descripcion</x-table.header>
                 <x-table.header :align="'left'" sortable wire:click="sortBy('stock')" :direction="$sortField == 'stock' ? $sortDirection : null" value="stock">Stock</x-table.header>
+                <x-table.header :align="'left'" sortable wire:click="sortBy('image')" :direction="$sortField == 'image' ? $sortDirection : null" value="imagen">Imagen</x-table.header>
                 <x-table.header :align="'left'">Estado</x-table.header>
                 <x-table.header :align="'center'">Acciones</x-table.header>
             </x-slot>
@@ -22,6 +26,7 @@
                             <x-table.cell>{{ $product->name }}</x-table.cell>
                             <x-table.cell>{{ $product->description }}</x-table.cell>
                             <x-table.cell>{{ $product->stock }}</x-table.cell>
+                            <x-table.cell><img width="100px"  src="{{asset('/storage/'.$product->image)}}"></x-table.cell>
                             <x-table.cell>
                                 <span
                                     class="inline-flex items-center bg-{{ $product->status_color }}-100 text-{{ $product->status_color }}-800 text-xs font-medium px-2.5 py-0.5 rounded-full">

@@ -127,7 +127,7 @@ class ProductController extends Controller
 //         //}
 //         return to_route('admin.products.index');
 //     }
-
+    
     public function restore($id)
     {
         if (Product::withTrashed()->find($id)->trashed()) {
