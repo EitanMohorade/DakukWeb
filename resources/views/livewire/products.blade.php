@@ -11,6 +11,7 @@
                 <x-table.header :align="'left'" sortable wire:click="sortBy('name')" :direction="$sortField == 'name' ? $sortDirection : null" value="nombre">Nombre</x-table.header>
                 <x-table.header :align="'left'" sortable wire:click="sortBy('description')" :direction="$sortField == 'description' ? $sortDirection : null" value="descripcion">Descripcion</x-table.header>
                 <x-table.header :align="'left'" sortable wire:click="sortBy('stock')" :direction="$sortField == 'stock' ? $sortDirection : null" value="stock">Stock</x-table.header>
+                <x-table.header :align="'left'" sortable wire:click="sortBy('image')" :direction="$sortField == 'image' ? $sortDirection : null" value="imagen">Imagen</x-table.header>
                 <x-table.header :align="'left'">Estado</x-table.header>
                 <x-table.header :align="'center'">Acciones</x-table.header>
             </x-slot>
@@ -22,6 +23,7 @@
                             <x-table.cell>{{ $product->name }}</x-table.cell>
                             <x-table.cell>{{ $product->description }}</x-table.cell>
                             <x-table.cell>{{ $product->stock }}</x-table.cell>
+                            <x-table.cell><img width="100px"  src="{{asset('/storage/'.$product->image)}}"></x-table.cell>
                             <x-table.cell>
                                 <span
                                     class="inline-flex items-center bg-{{ $product->status_color }}-100 text-{{ $product->status_color }}-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
