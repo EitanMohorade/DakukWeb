@@ -13,12 +13,27 @@ class Users extends Component
     use WithPagination;
 
     public $search = '';
+    public $sortField = 'id';
+    public $sortDirection = 'asc';
+
+    protected $queryString = ['sortField', 'sortDirection']; // Displaying the sort params in the URL
+
     public function render()
     {
-        sleep(1);
+        sleep(0.5);
 
         return view('livewire.users', ['users' => User::search($this->search, function ($query) {
             $query->where('id', '!=', auth()->id());
-        })->withTrashed()->paginate(15)]);
+        })->withTrashed()->orderBy($this->sortField, $this->sortDirection)->paginate(15)]);
+    }
+
+    public function sortBy($field) {
+        if($this->sortField == $field) {
+            $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        }
+        else {
+            $this->sortDirection = 'asc'; // The default sortDirection should always be 'asc'
+        }
+        $this->sortField = $field;
     }
 }
