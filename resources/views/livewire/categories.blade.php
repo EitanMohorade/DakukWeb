@@ -1,4 +1,7 @@
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6">
+<a href="{{route('categories.create')}}"
+        class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+        title="añadir">Añadir</a>
     <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
             <input type="text" placeholder="Buscar..." wire:model="search" class="border-0 rounded-lg w-1/3">
