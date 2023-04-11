@@ -27,7 +27,7 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
         Route::get('/users/{user}', 'show')->name('users.show');
         Route::get('/users/{user}/edit', 'edit')->name('users.edit');
         Route::put('/users/{user}', 'update')->name('users.update');
-        Route::delete('/users/{user}/delete', 'delete')->name('users.index');
+        Route::delete('/users/{user}/delete', 'delete')->name('users.destroy');
         Route::get('/users/{user}/restore', 'restore')->name('users.restore');
     });
 /*     Route::get('/users/create', [UserController::class, 'index'])->name('users.index');
