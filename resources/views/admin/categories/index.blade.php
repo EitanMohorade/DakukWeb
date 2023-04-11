@@ -1,35 +1,19 @@
-@extends("bootstrap")
-<a href="{{url ('/')}}"><button class="btn btn-primary">HOME</button></a>
-    <div class="big-padding" text-center blue-grey>
-        <h1>categories for admins</h1>
+<x-app-layout>
+    <link rel="stylesheet"
+        href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Categorias') }}
+        </h2>
+    </x-slot>
+    <div>
+
+        <section class="py-1 bg-blueGray-50">
+            <div class="w-full xl:w-10/12 mb-12 xl:mb-0 px-4 mx-auto mt-8">
+                @livewire('categories', key($category->id))
+            </div>
+
+        </section>
     </div>
-    <a href="{{route('categories.create')}}"><button class="btn btn-primary">add</button></a>
-    <div class="conteiner">
-    <table class="table table-bordered">
-            <form action="{{ route('categories.search') }}" method="GET" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar productos" aria-label="Buscar" name="query">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
-            <tr>
-                <td>id</td>
-                <td>category</td>
-                <td>father category</td>
-                <td>ACCIONES</td>
-            </tr>
-        @foreach ($categories as $category)
-            <tr>
-                <td>{{$category->id}}</td>
-                <td>{{$category->name}}</td>
-                <td>{{$category->category_id}}</td>
-                <td>
-                    <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit">Eliminar</button>
-                    </form>
-                    <a href="{{ route('categories.edit', $category->id  ) }}"><button class="btn btn-primary">edit</button>
-                    <a href="{{ route('categories.show', $category->id  ) }}"><button class="btn btn-primary">show</button>
-                </td>
-            </tr>
-        @endforeach
-    </table>
+
+</x-app-layout>

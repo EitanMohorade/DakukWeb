@@ -14,8 +14,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        return view('admin.products.index', ['products' => $products]);
+        /*$products = Product::all();
+        return view('admin.products.index', ['products' => $products]);*/
+        return view('admin.products.index');
     }
 
     /**
@@ -69,7 +70,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $products = Product::findOrFail($id);
-        return view('admin.products.show', ['products' => $products]);
+        return view('admin.products.index', ['products' => $products]);
     }
     /**
      * Search an specific register.
@@ -124,6 +125,6 @@ class ProductController extends Controller
         }else{
             $product->delete();
         }
-        return to_route('products.index');
+        return to_route('admin.products.index');
     }
 }
