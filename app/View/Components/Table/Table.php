@@ -20,9 +20,9 @@ class Table extends Component
      * @param bool $actions
      * @return void
      */
-    public function __construct($headers)
+    public function __construct()
     {
-        $this->headers = $headers;
+        //
     }
 
     /**
