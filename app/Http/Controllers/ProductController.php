@@ -117,14 +117,24 @@ class ProductController extends Controller
      * @param  string $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+//     public function destroy($id)
+//     {
+//         $product = Product::find($id)->delete();
+// /*         if ($id == 'all') {
+//             $product->update(['deleted_at' => now()]);
+//         }else{ */
+//             // $product>de-lete();
+//         //}
+//         return to_route('admin.products.index');
+//     }
+
+    public function restore($id)
     {
-        $product = Product::find($id);
-        if ($id == 'all') {
-            $product->update(['deleted_at' => now()]);
+        if (Product::withTrashed()->find($id)->trashed()) {
+            Product::withTrashed()->find($id)->restore();
         }else{
-            $product->delete();
+            Product::find($id)->delete();
         }
-        return to_route('admin.products.index');
+        return to_route('products.index');
     }
 }
