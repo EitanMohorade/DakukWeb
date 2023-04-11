@@ -119,12 +119,17 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = Product::find($id);
-        if ($id == 'all') {
-            $product->update(['deleted_at' => now()]);
-        }else{
-            $product->delete();
-        }
+        $product = Product::find($id)->delete();
         return to_route('admin.products.index');
+    }
+    
+    public function restore($id)
+    {
+        if (Product::withTrashed()->find($id)->trashed()) {
+            Product::withTrashed()->find($id)->restore();
+        }else{
+            Product::find($id)->delete();
+        }
+        return to_route('products.index');
     }
 }

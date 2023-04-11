@@ -27,10 +27,12 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function() {
 
     Route::resource('products', ProductController::class);
     Route::get('/searchProducts', [ProductController::class, 'search'])->name('products.search');
+    Route::get('/products/{product}/restore', [ProductController::class, 'restore'])->name('products.restore');
 
 
     Route::resource('categories', CategoryController::class);
     Route::get('/searchCategories', [CategoryController::class, 'search'])->name('categories.search');
+    Route::get('/categories/{category}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
 
     Route::resource('orders', OrderController::class)->only('index', 'show', 'destroy');
 
