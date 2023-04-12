@@ -22,9 +22,7 @@ class Products extends Component
     {
         sleep(0.5);
 
-        return view('livewire.products', ['products' => Product::search($this->search, function ($query) {
-            $query->where('id', '!=', auth()->id());
-        })->withTrashed()->orderBy($this->sortField, $this->sortDirection)->paginate(15)]);
+        return view('livewire.products', ['products' => Product::search($this->search)->withTrashed()->orderBy($this->sortField, $this->sortDirection)->paginate(15)]);
     }
 
     public function sortBy($field) {
