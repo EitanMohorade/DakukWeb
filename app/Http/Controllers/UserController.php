@@ -12,29 +12,8 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        /* $status = $request->get("status");
-        switch ($status) {
-            case "archived": // Get only soft-deleted users
-                $users = User::onlyTrashed()->get()->except(['password', 'remember_token']);
-                break;
-            case "all": // Get only soft-deleted users
-                $users = User::onlyTrashed()->get()->except(['password', 'remember_token']);
-                break;
-            default: // Get only active users
-                $users = User::all()->except(['password', 'remember_token']);
-                $status = "active";
-                break;
-        } */
-
-        /* $term = $request->query('term');
-        $users = User::when($term, function($query, $term){
-            $query->where('name', 'LIKE', "%{$term}%")->orWhere('surname', 'LIKE', "%{$term}%")->orWhere('email', 'LIKE', "%{$term}%");
-        })->get(); */
-
-        //$search = $request->get('search');
-
         return view('admin.users.index');
     }
 
@@ -118,13 +97,36 @@ class UserController extends Controller
      * @param  string $id
      * @return \Illuminate\Http\Response
      */
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if(!$user->trashed()){
+            User::find($id)->delete();
+            $status = 'Usuario eliminado exitosamente';
+        }
+        else{
+            $status = 'No se puede borrar un usuario ya eliminado o inexistente';
+        }
+        return to_route('users.index')->with('status', $status);
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     *
+     * @param  string $id
+     * @return \Illuminate\Http\Response
+     */
     public function restore($id)
     {
-        if (User::withTrashed()->find($id)->trashed()) {
-            User::withTrashed()->find($id)->restore();
-        }else{
-            User::find($id)->delete();
+        $user = User::withTrashed()->find($id);
+        if($user->trashed()){
+            $user->restore();
+            $status = 'Usuario restaurado exitosamente';
         }
-        return to_route('users.index');
+        else{
+            $status = 'No se puede restaurar un usuario activo o inexistente';
+        }
+        
+        return to_route('users.index')->with('status', $status);
     }
 }

@@ -7,10 +7,14 @@
     <div class="block w-full overflow-x-auto rounded-t-xl bg-sky-100 shadow-lg">
         <x-table.table>
             <x-slot name="head">
-                <x-table.header :align="'left'" sortable wire:click="sortBy('id')" :direction="$sortField == 'id' ? $sortDirection : null" value="ID">ID</x-table.header>
-                <x-table.header :align="'left'" sortable wire:click="sortBy('name')" :direction="$sortField == 'name' ? $sortDirection : null" value="nombre">Nombre</x-table.header>
-                <x-table.header :align="'left'" sortable wire:click="sortBy('surname')" :direction="$sortField == 'surname' ? $sortDirection : null" value="apellido">Apellido</x-table.header>
-                <x-table.header :align="'left'" sortable wire:click="sortBy('email')" :direction="$sortField == 'email' ? $sortDirection : null" value="email">Email</x-table.header>
+                <x-table.header :align="'left'" sortable wire:click="sortBy('id')" :direction="$sortField == 'id' ? $sortDirection : null" value="ID">ID
+                </x-table.header>
+                <x-table.header :align="'left'" sortable wire:click="sortBy('name')" :direction="$sortField == 'name' ? $sortDirection : null" value="nombre">
+                    Nombre</x-table.header>
+                <x-table.header :align="'left'" sortable wire:click="sortBy('surname')" :direction="$sortField == 'surname' ? $sortDirection : null"
+                    value="apellido">Apellido</x-table.header>
+                <x-table.header :align="'left'" sortable wire:click="sortBy('email')" :direction="$sortField == 'email' ? $sortDirection : null"
+                    value="email">Email</x-table.header>
                 <x-table.header :align="'left'">Estado</x-table.header>
                 <x-table.header :align="'center'">Acciones</x-table.header>
             </x-slot>
@@ -32,16 +36,24 @@
                             <x-table.cell>
                                 <div class="flex justify-end">
                                     @if ($user->deleted_at)
-                                        <a href="{{ route('users.restore', $user->id) }}"
-                                            class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900"
-                                            title="Restaurar">Restaurar</a>
+                                        <form action={{ route('users.restore', $user->id) }} method="POST">
+                                            @method('PATCH')
+                                            @csrf
+                                            <button type="submit"
+                                                class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900"
+                                                title="Restaurar">Restaurar</button>
+                                        </form>
                                     @else
                                         <a href="{{ route('users.edit', $user->id) }}"
                                             class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                             title="Editar">Editar</a>
-                                        <a href="{{ route('users.restore', $user->id) }}"
-                                            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                                            title="Eliminar">Eliminar</a>
+                                        <form action={{ route('users.destroy', $user->id) }} method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit"
+                                                class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                                                title="Eliminar">Eliminar</button>
+                                        </form>
                                     @endif
                                 </div>
                             </x-table.cell>
