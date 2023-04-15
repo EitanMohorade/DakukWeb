@@ -1,3 +1,8 @@
+@if (session('status'))
+    @php
+        echo session('status');
+    @endphp
+@endif
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6">
 <a href="{{route('categories.create')}}"
         class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
@@ -33,16 +38,24 @@
                             <x-table.cell>
                                 <div class="flex justify-end">
                                     @if ($category->deleted_at)
-                                        <a href="{{ route('categories.restore', $category->id) }}"
-                                            class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900"
-                                            title="Restaurar">Restaurar</a>
+                                        <form action={{ route('categories.restore', $category->id) }} method="POST">
+                                            @method('PATCH')
+                                            @csrf
+                                            <button type="submit"
+                                                class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900"
+                                                title="Restaurar">Restaurar</button>
+                                        </form>
                                     @else
                                         <a href="{{ route('categories.edit', $category->id) }}"
                                             class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                                             title="Editar">Editar</a>
-                                        <a href="{{ route('categories.restore', $category->id) }}"
-                                            class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                                            title="Eliminar">Eliminar</a>
+                                        <form action={{ route('categories.destroy', $category->id) }} method="POST">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit"
+                                                class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                                                title="Eliminar">Eliminar</button>
+                                        </form>
                                     @endif
                                 </div>
                             </x-table.cell>

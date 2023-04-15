@@ -25,11 +25,11 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::patch('/users/{user}/restore', [UserController::class, 'restore'])->name('users.restore');
 
     Route::resource('products', ProductController::class);
-    Route::get('/products/{product}/restore', [ProductController::class, 'restore'])->name('products.restore');
+    Route::patch('/products/{product}/restore', [ProductController::class, 'restore'])->name('products.restore');
 
 
     Route::resource('categories', CategoryController::class);
-    Route::get('/categories/{category}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
+    Route::patch('/categories/{category}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
 
     Route::resource('orders', OrderController::class)->only('index', 'show', 'destroy');
 });

@@ -68,7 +68,7 @@ class CategoryController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate(ValidationRules()::categoryRules());
+    $request->validate(ValidationRules::categoryRules());
 
     $category = Category::create([
       'name' => $request->name,
@@ -104,19 +104,30 @@ class CategoryController extends Controller
     return to_route('categories.index');
   }
 
-  /**
-   * Remove the specified resource from storage.
-   *
-   * @param  category_id $id
-   * @return \Illuminate\Http\Response
-   */
+  public function destroy($id)
+  {
+      $category = Category::find($id);
+      if(!$category->trashed()){
+        Category::find($id)->delete();
+          $status = 'Categoria eliminado exitosamente';
+      }
+      else{
+          $status = 'No se puede borrar la categoria ya eliminado o inexistente';
+      }
+      return to_route('categories.index')->with('status', $status);
+  }
+  
   public function restore($id)
   {
-      if (Category::withTrashed()->find($id)->trashed()) {
-        Category::withTrashed()->find($id)->restore();
-      }else{
-        Category::find($id)->delete();
+      $category = Category::withTrashed()->find($id);
+      if($category->trashed()){
+          $category->restore();
+          $status = 'Categoria restaurado exitosamente';
       }
-      return to_route('categories.index');
+      else{
+          $status = 'No se puede restaurar la categoria activo o inexistente';
+      }
+      
+      return to_route('categories.index')->with('status', $status);
   }
 }

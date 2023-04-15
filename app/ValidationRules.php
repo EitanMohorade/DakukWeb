@@ -17,7 +17,7 @@ class ValidationRules
 
     public static function categoryRules() {
         return [
-            'name' => 'required',
+            'name' => 'required'
         ];
     }
 }

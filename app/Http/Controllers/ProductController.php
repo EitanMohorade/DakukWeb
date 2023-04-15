@@ -111,24 +111,30 @@ class ProductController extends Controller
      * @param  string $id
      * @return \Illuminate\Http\Response
      */
-//     public function destroy($id)
-//     {
-//         $product = Product::find($id)->delete();
-// /*         if ($id == 'all') {
-//             $product->update(['deleted_at' => now()]);
-//         }else{ */
-//             // $product>de-lete();
-//         //}
-//         return to_route('admin.products.index');
-//     }
+     public function destroy($id)
+    {
+        $product = Product::find($id);
+        if(!$product->trashed()){
+            Product::find($id)->delete();
+            $status = 'Producto eliminado exitosamente';
+        }
+        else{
+            $status = 'No se puede borrar un producto ya eliminado o inexistente';
+        }
+        return to_route('products.index')->with('status', $status);
+    }
     
     public function restore($id)
     {
-        if (Product::withTrashed()->find($id)->trashed()) {
-            Product::withTrashed()->find($id)->restore();
-        }else{
-            Product::find($id)->delete();
+        $product = Product::withTrashed()->find($id);
+        if($product->trashed()){
+            $product->restore();
+            $status = 'Producto restaurado exitosamente';
         }
-        return to_route('products.index');
+        else{
+            $status = 'No se puede restaurar un producto activo o inexistente';
+        }
+        
+        return to_route('products.index')->with('status', $status);
     }
 }

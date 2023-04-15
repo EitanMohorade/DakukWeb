@@ -1,3 +1,8 @@
+@if (session('status'))
+    @php
+        echo session('status');
+    @endphp
+@endif
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6">
     <div class="rounded-t mb-0 px-4 py-3 border-0">
         <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
