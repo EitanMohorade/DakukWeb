@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\ValidationRules;
 
 class CategoryController extends Controller
 {
@@ -67,10 +68,7 @@ class CategoryController extends Controller
    */
   public function store(Request $request)
   {
-    $request->validate([
-      'name' => 'required',
-      //'category_id' => 'required'
-    ]);
+    $request->validate(ValidationRules()::categoryRules());
 
     $category = Category::create([
       'name' => $request->name,

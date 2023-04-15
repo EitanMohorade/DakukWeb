@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\ValidationRules;
 
 class ProductController extends Controller
 {
@@ -39,14 +40,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         // Validating product props
-        $request->validate([
-            'name' => 'required', //WITH: |alpha_num:ascii|min:3|max:255 THERE IS AN ERROR
-            //'category_id' => ['required|numeric|gt:0'],
-            'description' => 'required', //WITH: |alpha_num:ascii|min:3|max:1024 THERE IS AN ERROR
-            'price' => 'required', //WITH |numeric|gt:0 THERE IS AN ERROR
-            'stock' => 'required',
-            'image' => 'required|image|dimensions:min_width=100,min_height=100'
-        ]);
+        $request->validate(ValidationRules::productRules());
 
         // $category = Category::find($request->category_id);
         $imagePath = $request->file('image')->store('storage', 'public'); // Saving the image path
