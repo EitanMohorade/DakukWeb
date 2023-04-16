@@ -32,4 +32,5 @@ Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
     Route::patch('/categories/{category}/restore', [CategoryController::class, 'restore'])->name('categories.restore');
 
     Route::resource('orders', OrderController::class)->only('index', 'show', 'destroy');
+    Route::patch('/orders/{order}/restore', [OrderController::class, 'restore'])->name('orders.restore');
 });
