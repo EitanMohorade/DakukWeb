@@ -15,8 +15,11 @@ class Users extends Component
     public $search = '';
     public $sortField = 'id';
     public $sortDirection = 'asc';
+    // public $status = 'active';
+    public $usersPerPage = 15;
+    public $paginationValues = [5, 15, 25, 50, 100];
 
-    protected $queryString = ['sortField', 'sortDirection']; // Displaying the sort params in the URL
+    protected $queryString = ['sortField', 'sortDirection', 'usersPerPage']; // Displaying the sort params in the URL
 
     public function render()
     {
@@ -24,7 +27,7 @@ class Users extends Component
 
         return view('livewire.users', ['users' => User::search($this->search, function ($query) {
             $query->where('id', '!=', auth()->id());
-        })->withTrashed()->orderBy($this->sortField, $this->sortDirection)->paginate(15)]);
+        })->withTrashed()->orderBy($this->sortField, $this->sortDirection)->paginate($this->usersPerPage)]);
     }
 
     public function sortBy($field) {
@@ -36,4 +39,19 @@ class Users extends Component
         }
         $this->sortField = $field;
     }
+
+    public function setPagination($pagination) {
+        if($pagination > 0 && $pagination != $this->usersPerPage) {
+            $this->usersPerPage = $pagination;
+        }
+    }
+
+    // Getting users based on the selected status
+/*     public function getUsersByStatus($status) {
+        return [
+            'active' => User::all(),
+            'deleted' => User::onlyTrashed(),
+            'all' => User::withTrashed(),
+        ][$status];
+    } */
 }

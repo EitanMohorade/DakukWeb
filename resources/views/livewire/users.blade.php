@@ -4,9 +4,29 @@
     @endphp
 @endif
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6">
-    <div class="rounded-t mb-0 px-4 py-3 border-0">
-        <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-            <input type="text" placeholder="Buscar..." wire:model="search" class="border-0 rounded-lg w-1/3">
+    <div class="w-full flex rounded-t mb-0 px-4 py-3 border-0">
+        <x-dropdown align="top" contentClasses="flex flex-col" width='20'>
+            <x-slot name="trigger">
+                <button
+                    class="flex items-center bg-white rounded-lg p-2 w-auto text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
+                    <span><span class="font-semibold">{{ $usersPerPage }}</span> usuarios por página</span>
+                    <div class="ml-1">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </button>
+            </x-slot>
+            <x-slot name="content">
+                @foreach ($paginationValues as $value)
+                    <button wire:click="setPagination({{ $value }})" class="w-full {{ $usersPerPage == $value ? 'bg-green-100' : 'bg-white hover:bg-gray-50'}}">{{ $value }}</button>
+                @endforeach
+            </x-slot>
+        </x-dropdown>
+        <div class="relative w-1/2 px-4 max-w-full flex-grow flex-1 text-right">
+            <input type="text" placeholder="Buscar..." wire:model="search" class="border-0 rounded-lg w-1/2 ">
         </div>
     </div>
     <div class="block w-full overflow-x-auto rounded-t-xl bg-sky-100 shadow-lg">
@@ -26,7 +46,7 @@
             <x-slot name="body">
                 @if (!$users->isEmpty())
                     @foreach ($users as $user)
-                        <tr class="odd:bg-white even:bg-gray-100" wire:loading.class="opacity-75">
+                        <tr class="odd:bg-white even:bg-gray-50" wire:loading.class="opacity-75">
                             <x-table.cell>{{ $user->id }}</x-table.cell>
                             <x-table.cell>{{ $user->name }}</x-table.cell>
                             <x-table.cell>{{ $user->surname }}</x-table.cell>
