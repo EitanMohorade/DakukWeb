@@ -27,11 +27,13 @@ class Category extends Model
         'category_id'
     ];
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function categories(){
+    public function categories()
+    {
         return $this->hasMany(Category::class);
     }
     #[SearchUsingPrefix(['id', 'category_id', 'name'])]
@@ -49,5 +51,17 @@ class Category extends Model
     public function getStatusColorAttribute()
     {
         return $this->deleted_at ? 'red' : 'green';
+    }
+
+    /**
+     * Get the specified resource based on the selected status & search params
+     * 
+     * @param string $search
+     * @param string $status
+     */
+    public static function getByStatus($search, $status)
+    {
+        $query = self::search($search);
+        return ($status == 'deleted') ? $query->onlyTrashed() : $query;
     }
 }

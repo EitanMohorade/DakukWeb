@@ -15,16 +15,18 @@ class Products extends Component
     public $search = '';
     public $sortField = 'id';
     public $sortDirection = 'asc';
+    public $status = 'active';
+    public $statusValues = ['active', 'deleted'];
     public $productsPerPage = 15;
     public $paginationValues = [5, 15, 25, 50, 100];
 
-    protected $queryString = ['sortField', 'sortDirection', 'productsPerPage']; // Displaying the sort params in the URL
+    protected $queryString = ['sortField', 'sortDirection', 'productsPerPage', 'status']; // Displaying the sort params in the URL
 
     public function render()
     {
         sleep(0.5);
 
-        return view('livewire.products', ['products' => Product::search($this->search)->withTrashed()->orderBy($this->sortField, $this->sortDirection)->paginate($this->productsPerPage)]);
+        return view('livewire.products', ['products' => Product::getByStatus($this->search, $this->status)->orderBy($this->sortField, $this->sortDirection)->paginate($this->productsPerPage)]);
     }
 
     public function sortBy($field) {
@@ -41,5 +43,18 @@ class Products extends Component
         if($pagination > 0 && $pagination != $this->productsPerPage) {
             $this->productsPerPage = $pagination;
         }
+    }
+
+    public function setStatus($status) {
+        if(in_array($status, $this->statusValues) && $this->status != $status) {
+            $this->status = $status;
+        }
+    }
+
+    public function getStatusLabel($status) {
+        return [
+            'active' => 'Productos activos',
+            'deleted' => 'Productos eliminados',
+        ][$status];
     }
 }

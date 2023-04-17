@@ -34,7 +34,8 @@ class Product extends Model
      * Returns the product category.
      *
      */
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
     #[SearchUsingPrefix(['id', 'description', 'name', 'stock', 'image'])]
@@ -54,5 +55,17 @@ class Product extends Model
     public function getStatusColorAttribute()
     {
         return $this->deleted_at ? 'red' : 'green';
+    }
+
+    /**
+     * Get the specified resource based on the selected status & search params
+     * 
+     * @param string $search
+     * @param string $status
+     */
+    public static function getByStatus($search, $status)
+    {
+        $query = self::search($search);
+        return ($status == 'deleted') ? $query->onlyTrashed() : $query;
     }
 }

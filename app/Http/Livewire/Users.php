@@ -15,19 +15,18 @@ class Users extends Component
     public $search = '';
     public $sortField = 'id';
     public $sortDirection = 'asc';
-    // public $status = 'active';
+    public $status = 'active';
+    public $statusValues = ['active', 'deleted'];
     public $usersPerPage = 15;
     public $paginationValues = [5, 15, 25, 50, 100];
 
-    protected $queryString = ['sortField', 'sortDirection', 'usersPerPage']; // Displaying the sort params in the URL
+    protected $queryString = ['sortField', 'sortDirection', 'usersPerPage', 'status']; // Displaying the sort params in the URL
 
     public function render()
     {
         sleep(0.5);
-
-        return view('livewire.users', ['users' => User::search($this->search, function ($query) {
-            $query->where('id', '!=', auth()->id());
-        })->withTrashed()->orderBy($this->sortField, $this->sortDirection)->paginate($this->usersPerPage)]);
+        
+        return view('livewire.users', ['users' => User::getByStatus($this->search, $this->status)->orderBy($this->sortField, $this->sortDirection)->paginate($this->usersPerPage)]);
     }
 
     public function sortBy($field) {
@@ -46,12 +45,16 @@ class Users extends Component
         }
     }
 
-    // Getting users based on the selected status
-/*     public function getUsersByStatus($status) {
+    public function setStatus($status) {
+        if(in_array($status, $this->statusValues) && $this->status != $status) {
+            $this->status = $status;
+        }
+    }
+
+    public function getStatusLabel($status) {
         return [
-            'active' => User::all(),
-            'deleted' => User::onlyTrashed(),
-            'all' => User::withTrashed(),
+            'active' => 'Usuarios activos',
+            'deleted' => 'Usuarios eliminados',
         ][$status];
-    } */
+    }
 }

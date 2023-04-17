@@ -15,16 +15,18 @@ class Categories extends Component
     public $search = '';
     public $sortField = 'id';
     public $sortDirection = 'asc';
+    public $status = 'active';
+    public $statusValues = ['active', 'deleted'];
     public $categoriesPerPage = 15;
     public $paginationValues = [5, 15, 25, 50, 100];
 
-    protected $queryString = ['sortField', 'sortDirection', 'categoriesPerPage']; // Displaying the sort params in the URL
+    protected $queryString = ['sortField', 'sortDirection', 'categoriesPerPage', 'status']; // Displaying the sort params in the URL
 
     public function render()
     {
         sleep(0.5);
 
-        return view('livewire.categories', ['categories' => Category::search($this->search)->withTrashed()->orderBy($this->sortField, $this->sortDirection)->paginate($this->categoriesPerPage)]);
+        return view('livewire.categories', ['categories' => Category::getByStatus($this->search, $this->status)->orderBy($this->sortField, $this->sortDirection)->paginate($this->categoriesPerPage)]);
     }
 
     public function sortBy($field) {
@@ -41,5 +43,18 @@ class Categories extends Component
         if($pagination > 0 && $pagination != $this->categoriesPerPage) {
             $this->categoriesPerPage = $pagination;
         }
+    }
+    
+    public function setStatus($status) {
+        if(in_array($status, $this->statusValues) && $this->status != $status) {
+            $this->status = $status;
+        }
+    }
+
+    public function getStatusLabel($status) {
+        return [
+            'active' => 'Categorías activas',
+            'deleted' => 'Categorías eliminadas',
+        ][$status];
     }
 }
