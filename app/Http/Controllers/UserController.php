@@ -55,13 +55,9 @@ class UserController extends Controller
      * @param \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show(User $user)
     {
-        $id = $request->get('id');
-        $user = User::findOrFail($id);
-        return view('admin.users.show', [
-            "user" => $user,
-        ]);
+        return view('admin.users.show', ['user' => $user]);
     }
 
     /**
@@ -126,7 +122,7 @@ class UserController extends Controller
         else{
             $status = 'No se puede restaurar un usuario activo o inexistente';
         }
-        
+
         return to_route('users.index')->with('status', $status);
     }
 }

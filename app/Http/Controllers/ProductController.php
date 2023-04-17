@@ -61,11 +61,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $products = Product::findOrFail($id);
-        return view('admin.products.index', ['products' => $products]);
-    }
+    public function show(Product $product)
+{
+    return view('admin.products.show', ['product' => $product]);
+}
     /**
      * Search an specific register.
      *
@@ -123,7 +122,7 @@ class ProductController extends Controller
         }
         return to_route('products.index')->with('status', $status);
     }
-    
+
     public function restore($id)
     {
         $product = Product::withTrashed()->find($id);
@@ -134,7 +133,7 @@ class ProductController extends Controller
         else{
             $status = 'No se puede restaurar un producto activo o inexistente';
         }
-        
+
         return to_route('products.index')->with('status', $status);
     }
 }

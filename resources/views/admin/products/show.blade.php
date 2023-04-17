@@ -1,31 +1,17 @@
-@extends("bootstrap")
-    <!--  -->
-    <a href="{{url ('/')}}"><button class="btn btn-primary">HOME</button></a>
-    <a href="{{ route('products.index') }}"><button class="btn btn-primary">products</button></a>
-    <div class="big-padding" text-center blue-grey>
-        <h1>show product</h1>
-    </div>
-    <div class="conteiner">
-    <table class="table table-bordered">
-        <form>
-        </form>
-            <tr>
-                <td>id</td>
-                <td>category_id</td>
-                <td>name</td>
-                <td>description</td>
-                <td>price</td>
-                <td>stock</td>
-                <td>image</td>
-            </tr>
-            <tr href="{{ route('products.show', ['product' => $product->id]) }}">
-                <td>{{$product->id}}</td>
-                <td>{{$product->category_id}}</td>
-                <td>{{$product->name}}</td>
-                <td>{{$product->description}}</td>
-                <td>{{$product->price}}</td>
-                <td>{{$product->stock}}</td>
-                <td><image height="50px"  src="{{asset('/storage/'.$product->image)}}"></td>
-            </tr>
-    </table>
-    </div>
+<x-app-layout>
+    <link rel="stylesheet"
+        href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Ver Producto') }}
+        </h2>
+    </x-slot>
+            <div>
+                <h1>{{ $product->name }}</h1>
+                <img src="{{ asset('/storage/' . $product->image) }}">
+                <p>{{ $product->description }}</p>
+                <p>Precio: {{ $product->price }}</p>
+                <p>Categoría: {{ $product->category->name }}</p>
+            </div>
+</x-app-layout>
+
