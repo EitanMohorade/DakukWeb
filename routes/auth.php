@@ -16,6 +16,9 @@ Route::middleware('guest')->group(function () {
     Route::get('products', [ProductController::class, 'index'])
                 ->name('guest.products.index');
 
+    Route::get('/products/{product}', [ProductController::class, 'show'])
+                ->name('guest.products.show');
+
     Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
 

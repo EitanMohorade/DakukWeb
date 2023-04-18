@@ -73,9 +73,16 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
-{
-    return view('admin.products.show', ['product' => $product]);
-}
+    {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->hasRole('admin')) {
+                return view('admin.products.show', ['product' => $product]);
+            }
+        } else {
+            return view('products.show', ['product' => $product]);
+        }
+    }
     /**
      * Search an specific register.
      *
