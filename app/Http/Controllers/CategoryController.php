@@ -16,10 +16,6 @@ class CategoryController extends Controller
   public function index()
   {
     return view('admin.categories.index');
-    /*$categories = Category::all();
-    return view('admin.categories.index', [
-      'categories' => $categories,
-    ]);*/
   }
   /**
    * Display the specified resource.
@@ -116,7 +112,7 @@ class CategoryController extends Controller
       }
       return to_route('categories.index')->with('status', $status);
   }
-  
+
   public function restore($id)
   {
       $category = Category::withTrashed()->find($id);
@@ -127,7 +123,7 @@ class CategoryController extends Controller
       else{
           $status = 'No se puede restaurar la categoria activo o inexistente';
       }
-      
+
       return to_route('categories.index')->with('status', $status);
   }
 }

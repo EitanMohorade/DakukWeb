@@ -20,6 +20,18 @@
     <label for="validationCustom02" class="form-label">description</label>
     <input type="text" class="form-control" name="description" required>
 
+    {{--  <label for="validationCustom01" class="form-label">categorias</label>
+            <select name="category_id">
+                <option value="">--eligir--</option>
+                @foreach ($categories as $category)
+                    @if ($category->category_id == null)
+                        <option style="font-weight: bold;" name="category_id" value="{{$category->id}}">{{$category->name}}
+                    @else
+                        <option  name="category_id" value="{{$category->id}}">{{$category->name}}</option>
+                    @endif
+                @endforeach
+            </select>--}}
+
     <label for="validationCustom02" class="form-label">price</label>
     <input type="text" class="form-control" name="price" required>
 

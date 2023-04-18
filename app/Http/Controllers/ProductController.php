@@ -52,15 +52,21 @@ class ProductController extends Controller
             // Validating product props
             $request->validate(ValidationRules::productRules());
 
-            // $category = Category::find($request->category_id);
-            $imagePath = $request->file('image')->store('storage', 'public'); // Saving the image path
+            //$imagePath = $request->file('image')->store('storage', 'public'); // Saving the image path
+            /*$imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('storage'), $imageName);*/
+
+            $imageName = time() . '-' . $request->name . '.' .
+            $request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+
             $products = Product::create([
                 'name' => $request->name,
                 //'category_id' => 1,
                 'description' => $request->description,
                 'price' => $request->price,
                 'stock' => $request->stock,
-                'image' => $image_path = $imagePath,
+                'image' =>  $imageName,//$request->image,//$image_path = $imagePath,
             ]);
             return to_route('products.index');
         }

@@ -8,7 +8,7 @@
     </x-slot>
             <div>
                 <h1>{{ $product->name }}</h1>
-                <img src="{{ asset('/storage/' . $product->image) }}">
+                <img src="{{ asset('images/' . $product->image) }}">
                 <p>{{ $product->description }}</p>
                 <p>Precio: {{ $product->price }}</p>
                 <p>Categoría: {{ $product->category->name }}</p>

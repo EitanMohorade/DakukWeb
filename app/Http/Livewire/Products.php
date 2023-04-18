@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Livewire\Component;
 use Livewire\WithPagination;

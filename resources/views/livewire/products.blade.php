@@ -80,7 +80,7 @@
                             <x-table.cell>{{ $product->name }}</x-table.cell>
                             <x-table.cell>{{ $product->description }}</x-table.cell>
                             <x-table.cell>{{ $product->stock }}</x-table.cell>
-                            <x-table.cell><img width="100px" src="{{ asset('storage/' . $product->image) }}">
+                            <x-table.cell><img width="100px" src="{{ asset('images/' . $product->image) }}">
                             </x-table.cell>
                             <x-table.cell>
                                 <span
