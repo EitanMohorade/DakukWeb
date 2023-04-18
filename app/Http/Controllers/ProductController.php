@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\User;
 use App\ValidationRules;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 
 class ProductController extends Controller
 {
@@ -15,9 +18,14 @@ class ProductController extends Controller
      */
     public function index()
     {
-        /*$products = Product::all();
-        return view('admin.products.index', ['products' => $products]);*/
-        return view('admin.products.index');
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->hasRole('admin')) {
+                return view('admin.products.index');
+            }
+        } else {
+            return view('products.index');
+        }
     }
 
     /**
@@ -39,20 +47,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // Validating product props
-        $request->validate(ValidationRules::productRules());
+        $user = Auth::user();
+        if ($user->hasRole('admin')) {
+            // Validating product props
+            $request->validate(ValidationRules::productRules());
 
-        // $category = Category::find($request->category_id);
-        $imagePath = $request->file('image')->store('storage', 'public'); // Saving the image path
-        $products = Product::create([
-            'name' => $request->name,
-            //'category_id' => 1,
-            'description' => $request->description,
-            'price' => $request->price,
-            'stock' => $request->stock,
-            'image' => $image_path = $imagePath,
-        ]);
-        return to_route('products.index');
+            // $category = Category::find($request->category_id);
+            $imagePath = $request->file('image')->store('storage', 'public'); // Saving the image path
+            $products = Product::create([
+                'name' => $request->name,
+                //'category_id' => 1,
+                'description' => $request->description,
+                'price' => $request->price,
+                'stock' => $request->stock,
+                'image' => $image_path = $imagePath,
+            ]);
+            return to_route('products.index');
+        }
     }
 
     /**

@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
                         {{ __('Registrarse') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('guest.products.index')" :active="request()->routeIs('products.index')">
+                        {{ __('Productos') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -46,7 +49,7 @@
     </div>
 </nav>
 
-    
+
 {{--     <div class="font-sans text-gray-900 antialiased">
         {{ $slot }}
     </div> --}}
