@@ -18,7 +18,7 @@ use App\Http\Controllers\Controller;
 Route::group(['middleware' => 'role:admin', 'prefix' => 'admin'], function () {
 
     Route::get('/', function () {
-        return view('dashboard');
+        return view('admin.dashboard');
     })->name('dashboard');
 
     Route::resource('users', UserController::class);

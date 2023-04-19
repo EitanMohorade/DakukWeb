@@ -55,6 +55,8 @@
                 </x-table.header>
                 <x-table.header :align="'left'" sortable wire:click="sortBy('name')" :direction="$sortField == 'name' ? $sortDirection : null" value="nombre">
                     Nombre</x-table.header>
+                    <x-table.header :align="'left'" sortable wire:click="sortBy('category')" :direction="$sortField == 'category' ? $sortDirection : null" value="categoria">
+                        Categoria</x-table.header>
                 <x-table.header :align="'left'" sortable wire:click="sortBy('description')" :direction="$sortField == 'description' ? $sortDirection : null"
                     value="descripcion">Descripcion</x-table.header>
                 <x-table.header :align="'left'" sortable wire:click="sortBy('stock')" :direction="$sortField == 'stock' ? $sortDirection : null"
@@ -69,7 +71,19 @@
                         <tr class="odd:bg-white even:bg-gray-100" wire:loading.class="opacity-75">
                             <x-table.cell>{{ $product->id }}</x-table.cell>
                             <x-table.cell>{{ $product->name }}</x-table.cell>
-                            <x-table.cell>{{ $product->description }}</x-table.cell>
+                            <x-table.cell>
+                                @if ($product->category)
+                                    {{ $product->category->name }}
+                                @endif
+                            </x-table.cell>
+                            <x-table.cell class="whitespace-normal">
+                                <div x-data="{ expanded: false }" class="max-w-xs">
+                                    <p x-show="!expanded" class="truncate">{{ $product->description }}</p>
+                                    <p x-show="expanded" class="">{{ $product->description }}</p>
+                                    <button x-show="!expanded" @click="expanded = true" class="text-blue-500 hover:text-blue-700">More...</button>
+                                    <button x-show="expanded" @click="expanded = false" class="text-blue-500 hover:text-blue-700">Less...</button>
+                                </div>
+                            </x-table.cell>
                             <x-table.cell>{{ $product->stock }}</x-table.cell>
                             <x-table.cell><img width="100px" src="{{ asset('storage/' . $product->image) }}">
                             </x-table.cell>

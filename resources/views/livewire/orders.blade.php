@@ -23,7 +23,7 @@
                     @foreach ($orders as $order)
                         <tr class="odd:bg-white even:bg-gray-100" wire:loading.class="opacity-75">
                             <x-table.cell>{{ $order->id }}</x-table.cell>
-                            <x-table.cell>{{ $order->user_id }}</x-table.cell>
+                            <x-table.cell>{{ $order->user_id}}</x-table.cell>
                             <x-table.cell>{{ $order->comments }}</x-table.cell>
                             <x-table.cell>
                                 <span

@@ -16,6 +16,10 @@ use App\Http\Controllers\Controller;
 
 Route::group(['middleware' => 'role:customer', 'prefix' => 'user', 'as' => 'customer.'], function() {
     
+    Route::get('/', function () {
+        return view('customer.dashboard');
+    })->name('dashboard');
+
     Route::resource('profile', ProfileController::class);
     Route::resource('products', ProductController::class);
     Route::resource('orders', OrderController::class)->except('edit', 'update');
