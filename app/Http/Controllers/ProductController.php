@@ -22,9 +22,11 @@ class ProductController extends Controller
             $user = Auth::user();
             if ($user->hasRole('admin')) {
                 return view('admin.products.index');
+            }if ($user->hasRole('customer')) {
+                return view('products.index');
+            } else {
+                return view('products.index');
             }
-        } else {
-            return view('products.index');
         }
     }
 

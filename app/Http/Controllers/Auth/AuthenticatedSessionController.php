@@ -32,12 +32,12 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         $user = Auth::user();
-        if ($user->hasRole('customer')) {
-            return redirect()->intended(RouteServiceProvider::CUSTOMER);
-        }elseif($user->hasRole('admin')){
+        if($user->hasRole('admin')){
             return redirect()->intended(RouteServiceProvider::ADMIN);
-        }else {
+        }elseif($user->hasRole('customer')) {
             return redirect()->intended(RouteServiceProvider::CUSTOMER);
+        }else{
+            return view('admin.categories.index');
         }
     }
 

@@ -18,7 +18,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     public const ADMIN = '/admin';
-    public const CUSTOMER = '/customer';
+    public const CUSTOMER = '/customer'; //asegurarse de que la tabla model_has_role se actualizo con exito
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.

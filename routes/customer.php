@@ -14,13 +14,15 @@ use App\Http\Controllers\Controller;
 |--------------------------------------------------------------------------
 */
 
-Route::group(['middleware' => 'role:customer', 'prefix' => 'user', 'as' => 'customer.'], function() {
-    
+Route::group(['middleware' => 'role:customer', 'prefix' => 'customer', 'as' => 'customer.'], function() {
+
     Route::get('/', function () {
         return view('customer.dashboard');
     })->name('dashboard');
+    Route::get('products', [ProductController::class, 'index'])
+                ->name('products.index');
 
-    Route::resource('profile', ProfileController::class);
-    Route::resource('products', ProductController::class);
+    Route::get('/products/{product}', [ProductController::class, 'show'])
+                ->name('products.show');
     Route::resource('orders', OrderController::class)->except('edit', 'update');
 });

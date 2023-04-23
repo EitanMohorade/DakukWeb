@@ -5,13 +5,18 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
+                    @if(auth()->user()->hasRole('admin'))
                     <a href="{{ route('dashboard') }}">
+                    @elseif (auth()->user()->hasRole('customer'))
+                    <a href="{{ route('customer.dashboard') }}">
+                    @endif
                         <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex no-underline">
+                    @if(auth()->user()->hasRole('admin'))
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
@@ -27,6 +32,11 @@
                     <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
                         {{ __('Orders') }}
                     </x-nav-link>
+                    @elseif (auth()->user()->hasRole('customer'))
+                    <x-nav-link :href="route('customer.products.index')" :active="request()->routeIs('products.index')">
+                        {{ __('Productos') }}
+                    </x-nav-link>
+                    @endif
                 </div>
             </div>
 
