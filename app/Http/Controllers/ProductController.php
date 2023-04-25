@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use App\ValidationRules;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
 
 class ProductController extends Controller
 {
@@ -18,15 +22,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        if (Auth::check()) {
-            $user = User::find(Auth::user());
-            if ($user->hasRole('admin')) {
-                return view('admin.products.index');
-            }if ($user->hasRole('customer')) {
-                return view('products.index');
-            } 
-            }else {
-                return view('products.index');
+        $user = User::find(Auth::id());
+        if($user->hasRole('admin')){
+            return view('admin.products.index');
+        }elseif($user->hasRole('customer')) {
+            return view('products.index');
+        }else{
+            return view('admin.categories.index');
         }
     }
 

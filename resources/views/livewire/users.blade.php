@@ -4,6 +4,9 @@
     @endphp
 @endif
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6">
+    <a href="{{ route('users.create') }}"
+    class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+    title="añadir">Añadir</a>
     <div class="w-full flex rounded-t mb-0 px-4 py-3 border-0">
         <div class="flex space-x-4">
             <x-dropdown align="top" contentClasses="flex flex-col" width='20'>
