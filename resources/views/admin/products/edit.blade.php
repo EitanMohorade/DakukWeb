@@ -1,32 +1,45 @@
 <x-app-layout>
-    <link rel="stylesheet"
-        href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Apartado de edicion') }}
-        </h2>
-    </x-slot>
-            <a href="{{route ('products.index')}}"><button class="btn btn-primary">VER</button></a>
-            <form action="{{ route('products.update', ['product' => $product->id]) }}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="form-group">
-                    <label for="name">Nombre:</label>
-                    <input type="text" name="name" id="name" value="{{ $product->name }}" class="form-control">
+    <x-auth-card>
+        <link rel="stylesheet"
+            href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
+        <x-slot name="logo">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ __('Apartado de edicion') }}
+            </h2>
+        </x-slot>
+                <form action="{{ route('products.update', ['product' => $product->id]) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="mt-4">
+                        <x-label for="name" :value="__('Name')"/>
+                        <input type="text" name="name" id="name" value="{{ $product->name }}" class="block mt-1 w-full">
+                    </div>
 
-                    <label for="validationCustom02" class="form-label">image</label>
-                    <input type="file" name="image" class="form-control-file" value="{{ $product->image }}">
+                    <div>
+                        <x-label for="image" :value="__('Image')"/>
+                        <input type="file" name="image" class="form-control-file" value="{{ $product->image }}">
+                    </div>
 
-                    <label for="validationCustom02" class="form-label">description</label>
-                    <input type="text" class="form-control" name="description" value="{{ $product->description }}" >
+                    <div>
+                        <x-label for="description" :value="__('Description')"/>
+                        <input type="text" class="block mt-1 w-full" name="description" value="{{ $product->description }}" >
+                    </div>
 
-                    <label for="validationCustom02" class="form-label">price</label>
-                    <input type="text" class="form-control" name="price" value="{{ $product->price }}">
+                    <div>
+                        <x-label for="price" :value="__('Price')"/>
+                        <input type="text" class="block mt-1 w-full" name="price" value="{{ $product->price }}">
+                    </div>
 
-                    <label for="validationCustom02" class="form-label">stock</label>
-                    <input type="text" class="form-control" name="stock" value="{{ $product->stock }}">
-                </div>
-                <button type="submit" class="btn btn-primary">Guardar cambios</button>
-            </form>
-
+                    <div>
+                        <x-label for="stock" :value="__('Stock')"/>
+                        <input type="text" class="block mt-1 w-full" name="stock" value="{{ $product->stock }}">
+                    </div>
+                    
+                    <div class="flex items-center justify-end mt-4">
+                        <x-button class="ml-4">
+                            {{ __('Save Changes') }}
+                        </x-button>
+                    </div>            
+                </form>
+    </x-auth-card>
 </x-app-layout>

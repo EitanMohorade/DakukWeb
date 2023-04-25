@@ -6,12 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\User;
 use App\ValidationRules;
-use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
+use Spatie\Permission\Traits\HasRoles;
 
 class ProductController extends Controller
 {
@@ -25,10 +25,8 @@ class ProductController extends Controller
         $user = User::find(Auth::id());
         if($user->hasRole('admin')){
             return view('admin.products.index');
-        }elseif($user->hasRole('customer')) {
-            return view('products.index');
         }else{
-            return view('admin.categories.index');
+            return view('guest.products.index');
         }
     }
 
@@ -51,8 +49,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $user = User::find(Auth::user());
-        if ($user->hasRole('admin')) {
             // Validating product props
             $request->validate(ValidationRules::productRules());
 
@@ -73,7 +69,7 @@ class ProductController extends Controller
                 'image' =>  $imageName,//$request->image,//$image_path = $imagePath,
             ]);
             return to_route('products.index');
-        }
+        
     }
 
     /**
@@ -84,14 +80,12 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        if (Auth::check()) {
-            $user = User::find(Auth::user());
+            $user = User::find(Auth::id());
             if ($user->hasRole('admin')) {
                 return view('admin.products.show', ['product' => $product]);
+            }else{
+                return view('guest.products.show', ['product' => $product]);
             }
-        } else {
-            return view('products.show', ['product' => $product]);
-        }
     }
     /**
      * Search an specific register.

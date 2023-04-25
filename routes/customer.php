@@ -20,9 +20,9 @@ Route::group(['middleware' => 'role:customer', 'prefix' => 'customer', 'as' => '
         return view('customer.dashboard');
     })->name('dashboard');
     Route::get('products', [ProductController::class, 'index'])
-                ->name('products.index');
+                ->name('guest.products.index');
 
     Route::get('/products/{product}', [ProductController::class, 'show'])
-                ->name('products.show');
+                ->name('guest.products.show');
     Route::resource('orders', OrderController::class)->except('edit', 'update');
 });
