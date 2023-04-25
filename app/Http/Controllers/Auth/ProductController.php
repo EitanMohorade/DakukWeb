@@ -19,7 +19,7 @@ class ProductController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            $user = Auth::user();
+            $user = User::find(Auth::user());
             if ($user->hasRole('admin')) {
                 return view('admin.products.index');
             }
@@ -47,7 +47,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $user = Auth::user();
+        $user = User::find(Auth::user());
         if ($user->hasRole('admin')) {
             // Validating product props
             $request->validate(ValidationRules::productRules());
@@ -81,7 +81,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         if (Auth::check()) {
-            $user = Auth::user();
+            $user = User::find(Auth::user());
             if ($user->hasRole('admin')) {
                 return view('admin.products.show', ['product' => $product]);
             }
