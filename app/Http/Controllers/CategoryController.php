@@ -5,6 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\ValidationRules;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
+use Spatie\Permission\Traits\HasRoles;
+use App\Models\User;
 
 class CategoryController extends Controller
 {
@@ -15,7 +22,17 @@ class CategoryController extends Controller
    */
   public function index()
   {
-    return view('admin.categories.index');
+    if(Auth::check()){
+      $user = User::find(Auth::id());
+
+          if($user->hasRole('admin')){
+            return view('admin.categories.index');
+          }elseif($user->hasRole('customer')){
+            return view('customer.categories.index');
+          }
+      }else{
+        return view('customer.categories.index');
+      }
   }
   /**
    * Display the specified resource.

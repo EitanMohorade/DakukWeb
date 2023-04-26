@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +26,5 @@ Route::group(['middleware' => 'role:customer', 'prefix' => 'customer', 'as' => '
     Route::get('/products/{product}', [ProductController::class, 'show'])
                 ->name('products.show');
     Route::resource('orders', OrderController::class)->except('edit', 'update');
+    Route::resource('categories', CategoryController::class)->except('edit', 'update');
 });

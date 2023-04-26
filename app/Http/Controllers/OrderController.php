@@ -4,12 +4,27 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\User;
+use App\ValidationRules;
+use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
+use Spatie\Permission\Traits\HasRoles;
 
 class OrderController extends Controller
 {
     public function index()
     {
-       return view('admin.orders.index');
+        if(Auth::check()){
+            $user = User::find(Auth::id());
+            if($user->hasRole('admin')){
+                return view('admin.orders.index');
+            }elseif($user->hasRole('customer')){
+                return view('customer.orders.index');
+            }
+        }
     }
     public function destroy($id)
     {

@@ -36,6 +36,12 @@
                     <x-nav-link :href="route('customer.products.index')" :active="request()->routeIs('products.index')">
                         {{ __('Productos') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('customer.orders.index')" :active="request()->routeIs('orders.index')">
+                        {{ __('Carrito') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('customer.categories.index')" :active="request()->routeIs('orders.index')">
+                        {{ __('Categorias') }}
+                    </x-nav-link>
                     @endif
                 </div>
             </div>
