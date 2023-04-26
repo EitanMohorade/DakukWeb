@@ -15,10 +15,10 @@
                         <input type="text" name="name" id="name" value="{{ $product->name }}" class="block mt-1 w-full">
                     </div>
 
-                    <div>
+                    {{-- <div>
                         <x-label for="image" :value="__('Image')"/>
                         <input type="file" name="image" class="form-control-file" value="{{ $product->image }}">
-                    </div>
+                    </div> --}}
 
                     <div>
                         <x-label for="description" :value="__('Description')"/>

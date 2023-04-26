@@ -52,4 +52,19 @@ class Order extends Model
     {
         return $this->deleted_at ? 'red' : 'green';
     }
+
+    /**
+     * Get the specified resource based on the selected status & search params
+     * 
+     * @param string $search
+     * @param string $status
+     */
+    public static function getByStatus($search, $status)
+    {
+        $query = self::search($search, function ($query) {
+            $query->where('id', '!=', auth()->id());
+        });
+
+        return ($status == 'deleted') ? $query->onlyTrashed() : $query;
+    }
 }

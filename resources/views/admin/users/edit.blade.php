@@ -1,24 +1,30 @@
-@extends("bootstrap")
-<body>
-            <!-- EDITAR DATOS A LA BD -->
-            <div class="big-padding" text-center blue-grey>
-              <h1>EDITAR user</h1>
-            </div>
-            <a href="{{url ('ViewUsers/')}}"><button class="btn btn-primary">VER</button></a>
-<form class="row g-3 needs-validation" method="POST" action="{{url ('actualizaruser/'.$user->id)}}" enctype="multipart/form-data" novalidate>
-    @csrf
-  <div class="col-md-2">
-    <label for="validationCustom01" class="form-label">name</label>
-    <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}" required>
+<x-app-layout>
+  <x-auth-card>
+      <link rel="stylesheet"
+          href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
+      <x-slot name="logo">
+          <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+              {{ __('Apartado de edicion') }}
+          </h2>
+      </x-slot>
+              <form action="{{ route('users.update', ['user' => $user->id]) }}" method="POST">
+                  @csrf
+                  @method('PUT')
+                  <div class="mt-4">
+                      <x-label for="name" :value="__('Name')"/>
+                      <input type="text" name="name" id="name" value="{{ $user->name }}" class="block mt-1 w-full">
+                  </div>
+                  
+                  <div class="mt-4">
+                    <x-label for="email" :value="__('Email')"/>
+                    <input type="text" name="email" id="email" value="{{ $user->email }}" class="block mt-1 w-full">
+                  </div>
 
-    <label for="validationCustom02" class="form-label">EMAIL</label>
-    <input type="text" class="form-control" name="Email" id="Email" value="{{$user->Email}}" required>
-
-    <label for="validationCustom02" class="form-label">password</label>
-    <input type="text" class="form-control" name="password" id="password" value="{{$user->password}}" required>
-
-  <button class="btn btn-primary" type="submit">Submit form</button>
-  </div>
-</form>
-
-</body>
+                  <div class="flex items-center justify-end mt-4">
+                      <x-button class="ml-4">
+                          {{ __('Save Changes') }}
+                      </x-button>
+                  </div>            
+              </form>
+  </x-auth-card>
+</x-app-layout>
