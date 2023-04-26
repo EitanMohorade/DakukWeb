@@ -10,7 +10,6 @@
             <tr>
                 <td>id</td>
                 <td>name</td>
-                <td>surname</td>
                 <td>Email</td>
                 <td>password</td>
                 <td>Acciones</td>
@@ -19,7 +18,6 @@
             <tr>
                 <td>{{$user->id}}</td>
                 <td>{{$user->name}}</td>
-                <td>{{$user->surname}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->password}}</td>
                 <td>

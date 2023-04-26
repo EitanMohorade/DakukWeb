@@ -17,7 +17,6 @@ return new class extends Migration
             'users',
             function (Blueprint $table) {
                 $table->unsignedInteger('old_id')->after('id')->nullable();
-                $table->string('surname')->after('name');
                 $table->string('phone', 50)->after('password')->nullable();
                 $table->softDeletes();
             }

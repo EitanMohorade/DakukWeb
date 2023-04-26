@@ -24,7 +24,6 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'surname',
         'email',
         'password',
         'phone',
@@ -60,14 +59,13 @@ class User extends Authenticatable
      *
      * @return array<string, mixed>
      */
-    #[SearchUsingPrefix(['id', 'email', 'name', 'surname'])]
+    #[SearchUsingPrefix(['id', 'email', 'name'])]
     public function toSearchableArray(): array
     {
         // Customize the data array...
         return [
             "id" => $this->id,
             "name" => $this->name,
-            "surname" => $this->surname,
             "email" => $this->email,
             "phone" => $this->phone,
             "deleted_at" => $this->deleted_at,
