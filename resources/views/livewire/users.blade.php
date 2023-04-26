@@ -63,8 +63,6 @@
                 </x-table.header>
                 <x-table.header :align="'left'" sortable wire:click="sortBy('name')" :direction="$sortField == 'name' ? $sortDirection : null" value="nombre">
                     Nombre</x-table.header>
-                <x-table.header :align="'left'" sortable wire:click="sortBy('surname')" :direction="$sortField == 'surname' ? $sortDirection : null"
-                    value="apellido">Apellido</x-table.header>
                 <x-table.header :align="'left'" sortable wire:click="sortBy('email')" :direction="$sortField == 'email' ? $sortDirection : null"
                     value="email">Email</x-table.header>
                 <x-table.header :align="'left'">Estado</x-table.header>
@@ -76,7 +74,6 @@
                         <tr class="odd:bg-white even:bg-gray-50" wire:loading.class="opacity-75">
                             <x-table.cell>{{ $user->id }}</x-table.cell>
                             <x-table.cell>{{ $user->name }}</x-table.cell>
-                            <x-table.cell>{{ $user->surname }}</x-table.cell>
                             <x-table.cell>{{ $user->email }}</x-table.cell>
                             <x-table.cell>
                                 <span

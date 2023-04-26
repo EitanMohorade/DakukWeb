@@ -11,9 +11,6 @@
     <label for="validationCustom01" class="form-label">name</label>
     <input type="text" class="form-control" name="name" id="name" value="{{$user->name}}" required>
 
-    <label for="validationCustom02" class="form-label">surname</label>
-    <input type="text" class="form-control" name="surname" id="surname" value="{{$user->surname}}" required>
-
     <label for="validationCustom02" class="form-label">EMAIL</label>
     <input type="text" class="form-control" name="Email" id="Email" value="{{$user->Email}}" required>
 
