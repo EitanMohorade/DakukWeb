@@ -22,11 +22,16 @@ class ProductController extends Controller
      */
     public function index()
     {
+        if(Auth::check()){
         $user = User::find(Auth::id());
-        if($user->hasRole('admin')){
-            return view('admin.products.index');
+
+            if($user->hasRole('admin')){
+                return view('admin.products.index');
+            }elseif($user->hasRole('customer')){
+                return view('products.index');
+            }
         }else{
-            return view('guest.products.index');
+            return view('products.index');
         }
     }
 
@@ -81,11 +86,15 @@ class ProductController extends Controller
     public function show(Product $product)
     {
             $user = User::find(Auth::id());
+        if(Auth::check()){
             if ($user->hasRole('admin')) {
                 return view('admin.products.show', ['product' => $product]);
-            }else{
-                return view('guest.products.show', ['product' => $product]);
+            }elseif($user->hasRole('customer')){
+                return view('products.show', ['product' => $product]);
             }
+        }else{
+            return view('products.show', ['product' => $product]);
+        }
     }
     /**
      * Search an specific register.
