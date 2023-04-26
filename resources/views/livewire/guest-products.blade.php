@@ -97,7 +97,7 @@
                                         <a href="{{ route('customer.products.show', $product->id) }}"\
                                         class="text-white bg-yellow-400 hover:bg-yellow-500 focus:outline-none focus:ring-4 focus:ring-yellow-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-yellow-900"
                                         title="Ver">Ver</a>
-                                        <a href="{{ route('customer.products.show', $product->id) }}"\
+                                        <a href="{{ route('customer.orders.store', $product->id) }}"\
                                             class="text-white bg-green-400 hover:bg-green-500 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:focus:ring-green-900"
                                             title="Carrito">Carrito</a>
                                     @endauth

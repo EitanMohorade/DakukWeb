@@ -26,6 +26,24 @@ class OrderController extends Controller
             }
         }
     }
+    public function create()
+    {
+        // return view('')
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store($id)
+    {
+        $orders = Order::create([
+            'user_id' => $id,
+        ]); 
+        return to_route('customer.dashboard');
+    }
     public function destroy($id)
     {
         $order = Order::find($id);
