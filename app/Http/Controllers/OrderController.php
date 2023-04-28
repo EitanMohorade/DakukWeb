@@ -28,7 +28,9 @@ class OrderController extends Controller
     }
     public function create()
     {
-        // return view('')
+        $orders = Order::all();
+        return view('admin.orders.create', ['orders' => $orders]);
+
     }
 
     /**
@@ -41,8 +43,19 @@ class OrderController extends Controller
     {
         $orders = Order::create([
             'user_id' => $id,
-        ]); 
+        ]);
         return to_route('customer.dashboard');
+    }
+    public function edit($id)
+    {
+        $order = Order::findOrFail($id);
+        return view('admin.orders.edit', ['order' => $order]);
+    }
+    public function update(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $order->update($request->all());
+        return to_route('orders.index');
     }
     public function destroy($id)
     {

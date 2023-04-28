@@ -5,8 +5,11 @@
 @endif
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6">
     <a href="{{ route('categories.create') }}"
-        class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-        title="añadir">Añadir</a>
+        class="w-32 flex justify-self-end items-center text-center space-x-2 text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-base px-5 py-2.5 mr-2 mb-2"
+        title="añadir">
+        <x-heroicon-o-plus class="w-6 h-6" />
+        <span>Añadir</span>
+    </a>
     <div class="w-full flex rounded-t mb-0 px-4 py-3 border-0">
         <div class="flex space-x-4">
             <x-dropdown align="top" contentClasses="flex flex-col" width='20'>

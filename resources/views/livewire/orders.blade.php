@@ -68,7 +68,11 @@
                         <tr class="odd:bg-white even:bg-gray-100" wire:loading.class="opacity-75">
                             <x-table.cell>{{ $order->id }}</x-table.cell>
                             <x-table.cell>{{ $order->user_id}}</x-table.cell>
-                            <x-table.cell>{{ $order->comments }}</x-table.cell>
+                            <x-table.cell class="whitespace-normal">
+                                <div x-data="{ expanded: false }" class="max-w-xs">
+                                    <p x-show="!expanded" class="truncate">{{ $order->comments }}</p>
+                                </div>
+                            </x-table.cell>
                             <x-table.cell>
                                 <span
                                     class="inline-flex items-center bg-{{ $order->status_color }}-100 text-{{ $order->status_color }}-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
@@ -87,6 +91,12 @@
                                                 title="Restaurar">Restaurar</button>
                                         </form>
                                     @else
+                                    <a href="{{ route('orders.edit', $order ->id) }}"
+                                        class="w-32 flex justify-self-end items-center text-center space-x-2 text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-base px-5 py-2.5 mr-2 mb-2"
+                                        title="comentario">
+                                        <x-heroicon-o-plus class="w-6 h-6" />
+                                        <span>Comentario</span>
+                                    </a>
                                         <form action={{ route('orders.destroy', $order->id) }} method="POST">
                                             @method('DELETE')
                                             @csrf
