@@ -39,8 +39,8 @@ class Orders extends Component
         $this->sortField = $field;
     }
     public function setPagination($pagination) {
-        if($pagination > 0 && $pagination != $this->usersPerPage) {
-            $this->usersPerPage = $pagination;
+        if($pagination > 0 && $pagination != $this->ordersPerPage) {
+            $this->ordersPerPage = $pagination;
         }
     }
 
