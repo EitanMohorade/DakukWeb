@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-auth-card>
+    <x-authentication-card>
         <link rel="stylesheet"
         href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
         <x-slot name="logo">
@@ -30,6 +30,6 @@
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 title="Editar">Editar</a>
             </div>
-    </x-auth-card>
+    </x-authentication-card>
 </x-app-layout>
 

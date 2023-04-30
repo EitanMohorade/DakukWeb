@@ -1,6 +1,6 @@
 
 <x-app-layout>
-    <x-auth-card>
+    <x-authentication-card>
         <x-slot name="logo">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Añadir Usuario') }}
@@ -8,7 +8,7 @@
         </x-slot>
 
         <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        <x-validation-errors class="mb-4" :errors="$errors" />
 
         <form method="POST" action="{{ route('register') }}">
             @csrf
@@ -51,5 +51,5 @@
                 </x-button>
             </div>
         </form>
-    </x-auth-card>
+    </x-authentication-card>
 </x-app-layout>

@@ -1,5 +1,5 @@
 <x-app-layout>
-<x-auth-card>
+<x-authentication-card>
     <link rel="stylesheet"
         href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
     <x-slot name="logo">
@@ -13,5 +13,5 @@
             <div class="mt-4">
                 <h1>Email: {{ $user->email }}</h1>
             </div>
-        </x-auth-card>
+        </x-authentication-card>
 </x-app-layout>

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-auth-card>
+    <x-authentication-card>
         <link rel="stylesheet"
             href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" />
         <x-slot name="logo">
@@ -41,5 +41,5 @@
                         </x-button>
                     </div>            
                 </form>
-    </x-auth-card>
+    </x-authentication-card>
 </x-app-layout>
