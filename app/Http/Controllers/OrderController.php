@@ -7,7 +7,11 @@ use App\Models\Order;
 use App\Models\User;
 use App\ValidationRules;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
+use Spatie\Permission\Traits\HasRoles;
 
 class OrderController extends Controller
 {
@@ -40,7 +44,7 @@ class OrderController extends Controller
         $orders = Order::create([
             'user_id' => $id,
         ]);
-        return to_route('home');
+        return to_route('customer.dashboard');
     }
     public function edit($id)
     {

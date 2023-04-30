@@ -1,6 +1,6 @@
 @extends("bootstrap")
     <!-- VER DATOS DE BD -->
-    <a href="{{url ('/')}}"><button class="btn btn-primary">ADMIN</button></a>
+    <a href="{{url ('/')}}"><button class="btn btn-primary">HOME</button></a>
     <div class="big-padding" text-center blue-grey>
         <h1>VER users</h1>
     </div>

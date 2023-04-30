@@ -18,7 +18,6 @@ Route::group(['middleware' => 'role:customer', 'prefix' => 'customer', 'as' => '
     Route::get('/', function () {
         return view('customer.dashboard');
     })->name('dashboard');
-
     Route::get('products', [ProductController::class, 'index'])
                 ->name('products.index');
 

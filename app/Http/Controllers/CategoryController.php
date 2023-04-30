@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\ValidationRules;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
+use Spatie\Permission\Traits\HasRoles;
 use App\Models\User;
 
 class CategoryController extends Controller
@@ -18,14 +22,17 @@ class CategoryController extends Controller
    */
   public function index()
   {
-    if (Auth::check()) {
+    if(Auth::check()){
       $user = User::find(Auth::id());
 
-      if ($user->hasRole('admin')) {
-        return view('admin.categories.index');
+          if($user->hasRole('admin')){
+            return view('admin.categories.index');
+          }elseif($user->hasRole('customer')){
+            return view('customer.categories.index');
+          }
+      }else{
+        return view('customer.categories.index');
       }
-    }
-    return view('customer.categories.index');
   }
   /**
    * Display the specified resource.
@@ -40,19 +47,19 @@ class CategoryController extends Controller
       "category" => $category,
     ]);
   }
-  /**
-   * Search an specific register.
-   *
-   * @param  \Illuminate\Http\Request $request
-   * @return \Illuminate\Http\Response
-   */
-  public function search(Request $request)
-  {
-    $query = $request->input('query');
-    $categories = Category::where('name', 'like', "%$query%")->get();
+    /**
+     * Search an specific register.
+     *
+     * @param  \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $categories = Category::where('name', 'like', "%$query%")->get();
 
-    return view('admin.categories.index', ['categories' => $categories]);
-  }
+        return view('admin.categories.index', ['categories' => $categories]);
+    }
   /**
    * Store a newly created resource in storage.
    *
@@ -112,26 +119,28 @@ class CategoryController extends Controller
 
   public function destroy($id)
   {
-    $category = Category::find($id);
-    if (!$category->trashed()) {
-      Category::find($id)->delete();
-      $status = 'Categoria eliminado exitosamente';
-    } else {
-      $status = 'No se puede borrar la categoria ya eliminado o inexistente';
-    }
-    return to_route('categories.index')->with('status', $status);
+      $category = Category::find($id);
+      if(!$category->trashed()){
+        Category::find($id)->delete();
+          $status = 'Categoria eliminado exitosamente';
+      }
+      else{
+          $status = 'No se puede borrar la categoria ya eliminado o inexistente';
+      }
+      return to_route('categories.index')->with('status', $status);
   }
 
   public function restore($id)
   {
-    $category = Category::withTrashed()->find($id);
-    if ($category->trashed()) {
-      $category->restore();
-      $status = 'Categoria restaurado exitosamente';
-    } else {
-      $status = 'No se puede restaurar la categoria activo o inexistente';
-    }
+      $category = Category::withTrashed()->find($id);
+      if($category->trashed()){
+          $category->restore();
+          $status = 'Categoria restaurado exitosamente';
+      }
+      else{
+          $status = 'No se puede restaurar la categoria activo o inexistente';
+      }
 
-    return to_route('categories.index')->with('status', $status);
+      return to_route('categories.index')->with('status', $status);
   }
 }

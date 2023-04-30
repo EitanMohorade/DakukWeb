@@ -16,7 +16,31 @@ class RoleSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(['name' => 'admin']);
-        Role::create(['name' => 'customer']);
+        $adminRole = Role::create(['name' => 'admin']);
+        $customerRole = Role::create(['name' => 'customer']);
+
+        Permission::create(['name' => 'users.index'])->assignRole($adminRole);
+        Permission::create(['name' => 'users.show'])->assignRole($adminRole);
+        Permission::create(['name' => 'users.new'])->assignRole($adminRole);
+        Permission::create(['name' => 'users.store'])->assignRole($adminRole);
+        Permission::create(['name' => 'users.edit'])->assignRole($adminRole);
+        Permission::create(['name' => 'users.update'])->assignRole($adminRole);
+        Permission::create(['name' => 'users.delete'])->assignRole($adminRole);
+
+        Permission::create(['name' => 'products.index'])->syncRoles([$adminRole, $customerRole]);
+        Permission::create(['name' => 'products.show'])->syncRoles([$adminRole, $customerRole]);
+        Permission::create(['name' => 'products.new'])->assignRole($adminRole);
+        Permission::create(['name' => 'products.store'])->assignRole($adminRole);
+        Permission::create(['name' => 'products.edit'])->assignRole($adminRole);
+        Permission::create(['name' => 'products.update'])->assignRole($adminRole);
+        Permission::create(['name' => 'products.delete'])->assignRole($adminRole);
+        
+        Permission::create(['name' => 'categories.index'])->syncRoles([$adminRole, $customerRole]);
+        Permission::create(['name' => 'categories.show'])->syncRoles([$adminRole, $customerRole]);
+        Permission::create(['name' => 'categories.new'])->assignRole($adminRole);
+        Permission::create(['name' => 'categories.store'])->assignRole($adminRole);
+        Permission::create(['name' => 'categories.edit'])->assignRole($adminRole);
+        Permission::create(['name' => 'categories.update'])->assignRole($adminRole);
+        Permission::create(['name' => 'categories.delete'])->assignRole($adminRole);
     }
 }

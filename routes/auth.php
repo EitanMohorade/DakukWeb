@@ -19,7 +19,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/products/{product}', [ProductController::class, 'show'])
                 ->name('guest.products.show');
 
-/*     Route::get('register', [RegisteredUserController::class, 'create'])
+    Route::get('register', [RegisteredUserController::class, 'create'])
                 ->name('register');
 
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -42,10 +42,10 @@ Route::middleware('guest')->group(function () {
                 ->name('password.reset');
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
-                ->name('password.update'); */
+                ->name('password.update');
 });
 
-/* Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () {
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])
                 ->name('verification.notice');
 
@@ -64,4 +64,4 @@ Route::middleware('guest')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
-}); */
+});

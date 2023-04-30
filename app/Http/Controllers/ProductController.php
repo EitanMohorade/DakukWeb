@@ -7,7 +7,11 @@ use App\Models\Product;
 use App\Models\User;
 use App\ValidationRules;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
+use Spatie\Permission\Traits\HasRoles;
 
 class ProductController extends Controller
 {
@@ -18,14 +22,17 @@ class ProductController extends Controller
      */
     public function index()
     {
-        if (Auth::check()) {
-            $user = User::find(Auth::id());
+        if(Auth::check()){
+        $user = User::find(Auth::id());
 
-            if ($user->hasRole('admin')) {
+            if($user->hasRole('admin')){
                 return view('admin.products.index');
+            }elseif($user->hasRole('customer')){
+                return view('products.index');
             }
+        }else{
+            return view('products.index');
         }
-        return view('customer.products.index');
     }
 
     /**
@@ -47,26 +54,27 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        // Validating product props
-        $request->validate(ValidationRules::productRules());
+            // Validating product props
+            $request->validate(ValidationRules::productRules());
 
-        //$imagePath = $request->file('image')->store('storage', 'public'); // Saving the image path
-        /*$imageName = time().'.'.$request->image->extension();
+            //$imagePath = $request->file('image')->store('storage', 'public'); // Saving the image path
+            /*$imageName = time().'.'.$request->image->extension();
             $request->image->move(public_path('storage'), $imageName);*/
 
-        $imageName = time() . '-' . $request->name . '.' .
+            $imageName = time() . '-' . $request->name . '.' .
             $request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
+            $request->image->move(public_path('images'), $imageName);
 
-        $products = Product::create([
-            'name' => $request->name,
-            //'category_id' => 1,
-            'description' => $request->description,
-            'price' => $request->price,
-            'stock' => $request->stock,
-            'image' =>  $imageName, //$request->image,//$image_path = $imagePath,
-        ]);
-        return to_route('products.index');
+            $products = Product::create([
+                'name' => $request->name,
+                //'category_id' => 1,
+                'description' => $request->description,
+                'price' => $request->price,
+                'stock' => $request->stock,
+                'image' =>  $imageName,//$request->image,//$image_path = $imagePath,
+            ]);
+            return to_route('products.index');
+        
     }
 
     /**
@@ -77,13 +85,16 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        if (Auth::check()) {
             $user = User::find(Auth::id());
+        if(Auth::check()){
             if ($user->hasRole('admin')) {
                 return view('admin.products.show', ['product' => $product]);
+            }elseif($user->hasRole('customer')){
+                return view('products.show', ['product' => $product]);
             }
+        }else{
+            return view('products.show', ['product' => $product]);
         }
-        return view('customer.products.show', ['product' => $product]);
     }
     /**
      * Search an specific register.
@@ -130,13 +141,14 @@ class ProductController extends Controller
      * @param  string $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+     public function destroy($id)
     {
         $product = Product::find($id);
-        if (!$product->trashed()) {
+        if(!$product->trashed()){
             Product::find($id)->delete();
             $status = 'Producto eliminado exitosamente';
-        } else {
+        }
+        else{
             $status = 'No se puede borrar un producto ya eliminado o inexistente';
         }
         return to_route('products.index')->with('status', $status);
@@ -145,10 +157,11 @@ class ProductController extends Controller
     public function restore($id)
     {
         $product = Product::withTrashed()->find($id);
-        if ($product->trashed()) {
+        if($product->trashed()){
             $product->restore();
             $status = 'Producto restaurado exitosamente';
-        } else {
+        }
+        else{
             $status = 'No se puede restaurar un producto activo o inexistente';
         }
 

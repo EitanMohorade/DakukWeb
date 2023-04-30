@@ -23,18 +23,18 @@ class UserSeeder extends Seeder
             'name' => 'Dakuk Master',
             'email' => 'dakuk@admin.com',
             'email_verified_at' => now(),
-            'password' => Hash::make('password'),
+            'password' => Hash::make('1234'), //password
             'phone' => fake()->phoneNumber(),
             'remember_token' => Str::random(10),
         ]);
         
         $user->assignRole('admin');
 
-        User::factory(20)->create()->each(function ($user) {
+        User::factory(10)->create()->each(function ($user) {
             $user->assignRole('customer');
         });
 
-        User::factory(20)->trashed()->create()->each(function ($user) {
+        User::factory(10)->trashed()->create()->each(function ($user) {
             $user->assignRole('customer');
         });
     }
