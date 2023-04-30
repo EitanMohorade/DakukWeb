@@ -66,9 +66,10 @@
                 </x-table.header>
                 <x-table.header :align="'left'" sortable wire:click="sortBy('name')" :direction="$sortField == 'name' ? $sortDirection : null" value="nombre">
                     Nombre</x-table.header>
-                    <x-table.header :align="'left'" sortable wire:click="sortBy('category')" :direction="$sortField == 'category' ? $sortDirection : null" value="categoria">
-                        Categoria</x-table.header>
-                    <x-table.header :align="'left'" sortable wire:click="sortBy('description')" :direction="$sortField == 'description' ? $sortDirection : null"
+                <x-table.header :align="'left'" sortable wire:click="sortBy('category')" :direction="$sortField == 'category' ? $sortDirection : null"
+                    value="categoria">
+                    Categoria</x-table.header>
+                <x-table.header :align="'left'" sortable wire:click="sortBy('description')" :direction="$sortField == 'description' ? $sortDirection : null"
                     value="descripcion">Descripcion</x-table.header>
                 <x-table.header :align="'left'" sortable wire:click="sortBy('stock')" :direction="$sortField == 'stock' ? $sortDirection : null"
                     value="stock">Stock</x-table.header>
@@ -133,15 +134,7 @@
                         </tr>
                     @endforeach
                 @else
-                    <tr>
-                        <td colspan="6">
-                            <div
-                                class="w-full h-52 bg-white text-center p-4 flex align-center justify-center items-center space-x-3 text-xl text-gray-500">
-                                <x-heroicon-o-information-circle class="w-10 h-10" />
-                                <span>Sin resultados.</span>
-                            </div>
-                        </td>
-                    </tr>
+                    <x-table.no-results />
                 @endif
             </x-slot>
         </x-table.table>

@@ -56,9 +56,12 @@
     <div class="block w-full overflow-x-auto rounded-t-xl bg-sky-100 shadow-lg">
         <x-table.table>
             <x-slot name="head">
-                <x-table.header :align="'left'" sortable wire:click="sortBy('id')" :direction="$sortField == 'id' ? $sortDirection : null" value="ID">ID</x-table.header>
-                <x-table.header :align="'left'" sortable wire:click="sortBy('user_id')" :direction="$sortField == 'user_id' ? $sortDirection : null" value="Usuario">Usuario</x-table.header>
-                <x-table.header :align="'left'" sortable wire:click="sortBy('comments')" :direction="$sortField == 'comments' ? $sortDirection : null" value="Comentarios">Comentarios</x-table.header>
+                <x-table.header :align="'left'" sortable wire:click="sortBy('id')" :direction="$sortField == 'id' ? $sortDirection : null" value="ID">ID
+                </x-table.header>
+                <x-table.header :align="'left'" sortable wire:click="sortBy('user_id')" :direction="$sortField == 'user_id' ? $sortDirection : null"
+                    value="Usuario">Usuario</x-table.header>
+                <x-table.header :align="'left'" sortable wire:click="sortBy('comments')" :direction="$sortField == 'comments' ? $sortDirection : null"
+                    value="Comentarios">Comentarios</x-table.header>
                 <x-table.header :align="'left'">Estado</x-table.header>
                 <x-table.header :align="'center'">Acciones</x-table.header>
             </x-slot>
@@ -67,7 +70,7 @@
                     @foreach ($orders as $order)
                         <tr class="odd:bg-white even:bg-gray-100" wire:loading.class="opacity-75">
                             <x-table.cell>{{ $order->id }}</x-table.cell>
-                            <x-table.cell>{{ $order->user_id}}</x-table.cell>
+                            <x-table.cell>{{ $order->user_id }}</x-table.cell>
                             <x-table.cell class="whitespace-normal">
                                 <div x-data="{ expanded: false }" class="max-w-xs">
                                     <p x-show="!expanded" class="truncate">{{ $order->comments }}</p>
@@ -91,12 +94,12 @@
                                                 title="Restaurar">Restaurar</button>
                                         </form>
                                     @else
-                                    <a href="{{ route('orders.edit', $order ->id) }}"
-                                        class="w-32 flex justify-self-end items-center text-center space-x-2 text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-base px-5 py-2.5 mr-2 mb-2"
-                                        title="comentario">
-                                        <x-heroicon-o-plus class="w-6 h-6" />
-                                        <span>Comentario</span>
-                                    </a>
+                                        <a href="{{ route('orders.edit', $order->id) }}"
+                                            class="w-32 flex justify-self-end items-center text-center space-x-2 text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-base px-5 py-2.5 mr-2 mb-2"
+                                            title="comentario">
+                                            <x-heroicon-o-plus class="w-6 h-6" />
+                                            <span>Comentario</span>
+                                        </a>
                                         <form action={{ route('orders.destroy', $order->id) }} method="POST">
                                             @method('DELETE')
                                             @csrf
@@ -110,15 +113,7 @@
                         </tr>
                     @endforeach
                 @else
-                    <tr>
-                        <td colspan="6">
-                            <div
-                                class="w-full h-52 bg-white text-center p-4 flex align-center justify-center items-center space-x-3 text-xl text-gray-500">
-                                <x-heroicon-o-information-circle class="w-10 h-10" />
-                                <span>Sin resultados.</span>
-                            </div>
-                        </td>
-                    </tr>
+                    <x-table.no-results />
                 @endif
             </x-slot>
         </x-table.table>
