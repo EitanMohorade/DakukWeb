@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class CreateUser extends Component
 {
-    public $isOpen = false;
+    public $openModal = false;
     public $name, $email, $password;
 
     protected $rules = [
@@ -32,7 +32,7 @@ class CreateUser extends Component
         ]);
 
         $this->reset(['name', 'email', 'password']); // Set values to null
-        $this->isOpen = false; // Close the modal
+        $this->openModal = false; // Close the modal
         session(['alert' => 'success', 'message' => 'Usuario creado exitosamente.']); // Setting up session data for success alert
         $this->emit('renderUsers'); // Re-rendering the component
     }
