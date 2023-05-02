@@ -14,7 +14,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('admin.users.index');
+        if (Auth::check()) {
+            $user = User::find(Auth::id());
+
+            if ($user->hasRole('admin')) {
+                return view('admin.users.index');
+            }
+        }
+        return view('customer.users.index');
     }
 
     /**

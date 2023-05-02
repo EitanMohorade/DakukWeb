@@ -61,7 +61,19 @@ return [
     |
     */
 
-    'home' => RouteServiceProvider::ADMIN,
+    'home' => function () {
+        if (Auth::check()) {
+            $user = Auth::user();
+            if ($user->hasRole('admin')) {
+                return RouteServiceProvider::ADMIN;
+            } else {
+                return RouteServiceProvider::CUSTOMER;
+            }
+        } else {
+            return RouteServiceProvider::HOME;
+        }
+    },
+
 
     /*
     |--------------------------------------------------------------------------
