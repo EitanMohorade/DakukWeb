@@ -11,7 +11,7 @@ class CreateUser extends Component
     public $name, $email, $password;
 
     protected $rules = [
-        'name' => 'required|max:10',
+        'name' => 'required|max:100',
         'email' => 'required|email:rfc,dns|unique:users|max:255',
         'password' => 'required|min:8',
     ];
