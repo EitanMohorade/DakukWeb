@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Dakuk') }}</title>
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -18,7 +18,7 @@
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
         @auth
-                @include('layouts.navigation')
+            @include('layouts.navigation')
         @endauth
         @guest
             @include('layouts.guest')
@@ -37,9 +37,8 @@
         </main>
     </div>
     @vite(['resources/js/app.js'])
-    <script src="https://kit.fontawesome.com/fc97d043af.js" crossorigin="anonymous"></script>
+    @stack('modals')
     @livewireScripts
-    @livewire('livewire-ui-modal')
 </body>
 
 </html>

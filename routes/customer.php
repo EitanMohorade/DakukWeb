@@ -1,10 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\CategoryController;
 
 /*
@@ -20,6 +18,7 @@ Route::group(['middleware' => 'role:customer', 'prefix' => 'customer', 'as' => '
     Route::get('/', function () {
         return view('customer.dashboard');
     })->name('dashboard');
+
     Route::get('products', [ProductController::class, 'index'])
                 ->name('products.index');
 

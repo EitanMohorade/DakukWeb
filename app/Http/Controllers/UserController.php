@@ -94,14 +94,20 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        if(!$user->trashed()){
+        if($user->id == auth()->id()){
+            $alert = 'error';
+            $message = 'No puedes eliminar tu propio usuario.';
+        }
+        else if(!$user->trashed()){
+            $alert = 'success';
             User::find($id)->delete();
-            $status = 'Usuario eliminado exitosamente';
+            $message = 'Usuario eliminado exitosamente';
         }
         else{
-            $status = 'No se puede borrar un usuario ya eliminado o inexistente';
+            $alert = 'error';
+            $message = 'No se puede borrar un usuario ya eliminado o inexistente';
         }
-        return to_route('users.index')->with('status', $status);
+        return to_route('users.index')->with(['alert' => $alert, 'message' => $message]);
     }
 
     /**

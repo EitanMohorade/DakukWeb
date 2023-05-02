@@ -12,9 +12,9 @@ class Header extends Component
      *
      * @return void
      */
-    public function __construct($align)
+    public function __construct()
     {
-        $this->align = $align;
+        //
     }
 
     /**
