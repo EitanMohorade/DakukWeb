@@ -34,10 +34,13 @@ class Category extends Model
     {
         return $this->hasMany(Category::class);
     }
+
+    /**
+     * The attributes that are searchable
+     */
     #[SearchUsingPrefix(['id', 'category_id', 'name'])]
     public function toSearchableArray(): array
     {
-        // Customize the data array...
         return [
             "id" => $this->id,
             "name" => $this->name,
@@ -61,5 +64,23 @@ class Category extends Model
     {
         $query = self::search($search);
         return ($status == 'deleted') ? $query->onlyTrashed() : $query;
+    }
+
+    public static function tree() {
+        $categories = Category::get();
+
+        $rootCategories = $categories->whereNull('category_id');
+
+        self::formatTree($rootCategories, $categories);
+
+        return $rootCategories;
+    }
+
+    private static function formatTree($categories, $allCategories) {
+        foreach($categories as $category) {
+            $category->children = $allCategories->where('category_id', $category->id)->values();
+
+            if($category->children->isNotEmpty()) self::formatTree($category->children, $allCategories);
+        }
     }
 }
