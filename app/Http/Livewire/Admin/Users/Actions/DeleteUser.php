@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire\Admin\Users\Actions;
 
-use App\Http\Controllers\UserController;
 use App\Models\User;
 use Livewire\Component;
 
@@ -28,7 +27,7 @@ class DeleteUser extends Component
             $message = 'Usuario eliminado exitosamente.';
         } else {
             $alert = 'error';
-            $message = 'No se puede borrar un usuario ya eliminado o inexistente';
+            $message = 'No se puede borrar un usuario ya eliminado o inexistente.';
         }
 
         $this->openModal = false; // Close the modal
