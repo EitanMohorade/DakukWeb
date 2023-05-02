@@ -1,15 +1,7 @@
-@if (session('status'))
-    @php
-        echo session('status');
-    @endphp
-@endif
 <div class="relative flex flex-col min-w-0 break-words w-full mb-6">
-    <a href="{{ route('categories.create') }}"
-        class="w-32 flex justify-self-end items-center text-center space-x-2 text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-base px-5 py-2.5 mr-2 mb-2"
-        title="añadir">
-        <x-heroicon-o-plus class="w-6 h-6" />
-        <span>Añadir</span>
-    </a>
+    @if (session('alert'))
+        @livewire('alerts.dismissable')
+    @endif
     <div class="w-full flex rounded-t mb-0 px-4 py-3 border-0">
         <div class="flex space-x-4">
             <x-dropdown align="top" contentClasses="flex flex-col" width='20'>
@@ -58,6 +50,7 @@
         <div class="relative w-1/2 px-4 max-w-full flex-grow flex-1 text-right">
             <input type="text" placeholder="Buscar..." wire:model="search" class="border-0 rounded-lg w-1/2 ">
         </div>
+        @livewire('admin.categories.actions.create-category')
     </div>
     <div class="block w-full overflow-x-auto rounded-t-xl bg-sky-100 shadow-lg">
         <x-table.table>

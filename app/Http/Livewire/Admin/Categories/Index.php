@@ -18,6 +18,8 @@ class Index extends Component
     public $categoriesPerPage = 15;
     public $paginationValues = [5, 15, 25, 50, 100];
 
+    protected $listeners = ['renderCategories' => 'render'];
+
     protected $queryString = ['sortField', 'sortDirection', 'categoriesPerPage', 'status']; // Displaying the sort params in the URL
 
     public function render()

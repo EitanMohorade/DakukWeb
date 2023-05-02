@@ -1,3 +1,28 @@
 <div>
-    {{-- Care about people's approval and you will be their prisoner. --}}
+    <x-button type="button" class="flex space-x-1" wire:click="$set('openModal', true)">
+        <x-heroicon-o-plus class="w-6 h-6" />
+        <span class="text-sm">Añadir</span>
+    </x-button>
+
+    <x-dialog-modal wire:model='openModal'>
+        <x-slot name="title">Nueva categoría</x-slot>
+        <x-slot name="content">
+            <div class="p-2">
+                <x-label value="Nombre" />
+                <x-input type="text" class="w-full" wire:model.defer="name" />
+                <x-input-error for="name" />
+            </div>
+            <div class="p-2">
+                <x-label value="Categoría padre" />
+                <x-input type="email" class="w-full" wire:model.defer="category_id" />
+                <x-input-error for="category_id" />
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <div class="flex space-x-2 justify-end">
+                <x-secondary-button wire:click="$set('openModal', false)">Cancelar</x-secondary-button>
+                <x-button wire:click="save">Crear</x-button>
+            </div>
+        </x-slot>
+    </x-dialog-modal>
 </div>
