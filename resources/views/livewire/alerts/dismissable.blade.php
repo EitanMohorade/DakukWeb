@@ -1,5 +1,5 @@
 <div>
-    <div id="alert-1" class="flex p-4 mb-4 text-{{ $this->color }}-800 rounded-lg bg-{{ $this->color }}-50 border border-{{ $this->color }}-300" role="alert">
+    <div id="alert-1" class="flex p-4 mb-4 text-{{ $this->color }}-800 rounded-lg bg-{{ $this->color }}-100 border border-{{ $this->color }}-300" role="alert">
         <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd"
