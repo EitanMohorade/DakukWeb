@@ -67,8 +67,9 @@
             <x-slot name="body">
                 @if (!$categories->isEmpty())
                     @foreach ($categories as $category)
-                        <tr class="odd:bg-white even:bg-gray-100" wire:loading.class="opacity-75">
-                            <x-table.cell>{{ $category->id }}</x-table.cell>
+                        <x-category.accordion-cell category={{$category}} />
+                        {{-- <tr class="odd:bg-white even:bg-gray-100" wire:loading.class="opacity-75">
+                            <x-table.cell>{{ $category }}</x-table.cell>
                             <x-table.cell>{{ $category->name }}</x-table.cell>
                             <x-table.cell>{{ $category->category_id }}</x-table.cell>
                             <x-table.cell>
@@ -103,7 +104,7 @@
                                     @endif
                                 </div>
                             </x-table.cell>
-                        </tr>
+                        </tr> --}}
                     @endforeach
                 @else
                     <x-table.no-results />
@@ -112,6 +113,6 @@
         </x-table.table>
     </div>
     <div class="p-4 bg-sky-100 rounded-b-xl">
-        {{ $categories->links() }}
+        {{-- {{ $categories->links() }} --}}
     </div>
 </div>
