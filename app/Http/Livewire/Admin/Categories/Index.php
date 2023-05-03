@@ -26,7 +26,7 @@ class Index extends Component
     {
         sleep(0.5);
 
-        return view('livewire.admin.categories.index', ['categories' => Category::tree()/* Category::getByStatus($this->search, $this->status)->orderBy($this->sortField, $this->sortDirection)->paginate($this->categoriesPerPage) */]);
+        return view('livewire.admin.categories.index', ['categories' => /* Category::tree() */Category::getByStatus($this->search, $this->status)->orderBy($this->sortField, $this->sortDirection)->paginate($this->categoriesPerPage)]);
     }
 
     public function sortBy($field) {
