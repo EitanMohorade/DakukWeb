@@ -94,19 +94,8 @@
                                                 title="Restaurar">Restaurar</button>
                                         </form>
                                     @else
-                                        <a href="{{ route('orders.edit', $order->id) }}"
-                                            class="w-32 flex justify-self-end items-center text-center space-x-2 text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-base px-5 py-2.5 mr-2 mb-2"
-                                            title="comentario">
-                                            <x-heroicon-o-plus class="w-6 h-6" />
-                                            <span>Comentario</span>
-                                        </a>
-                                        <form action={{ route('orders.destroy', $order->id) }} method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit"
-                                                class="text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                                                title="Eliminar">Eliminar</button>
-                                        </form>
+                                        @livewire('admin.orders.actions.comment-order', ['order' => $order])
+                                        @livewire('admin.orders.actions.delete-order', ['order' => $order])
                                     @endif
                                 </div>
                             </x-table.cell>

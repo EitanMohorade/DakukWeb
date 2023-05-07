@@ -47,21 +47,4 @@ class EditProduct extends Component
 
         session()->flash('message', 'Producto actualizado exitosamente.');
     }
-
-    // public function save($id)
-    // {
-    //     $this->validate();
-
-    //     $product = Product::findOrFail($id);
-
-    //     $this->reset(['name', 'description', 'price', 'stock']); // Set values to null
-    //     $this->openModal = false; // Close the modal
-    //     session(['alert' => 'success', 'message' => 'Producto editado exitosamente.']); // Setting up session data for success alert
-    //     $this->emit('renderProducts'); // Re-rendering the component
-    // }
-
-    // public function updated($propName)
-    // {
-    //     $this->validateOnly($propName);
-    // }
 }
