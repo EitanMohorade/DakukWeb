@@ -108,10 +108,8 @@
                                                 title="Restaurar">Restaurar</button>
                                         </form>
                                     @else
-                                    @livewire('admin.products.show',['product' => $product])
-                                        <a href="{{ route('products.edit', $product->id) }}"
-                                            class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                            title="Editar">Editar</a>
+                                        @livewire('admin.products.show',['product' => $product])
+                                        @livewire('admin.products.actions.edit-product',['product' => $product])
                                         @livewire('admin.products.actions.delete-product',['product' => $product])
                                     @endif
                                 </div>

@@ -8,6 +8,15 @@
                 <ul>
                     <li>Nombre: {{ $product->name }}</li>
                 </ul>
+                <ul>
+                    <li>Descripcion: {{ $product->description }}</li>
+                </ul>
+                <ul>
+                    <li>Precio: {{ $product->price }}</li>
+                </ul>
+                <ul>
+                    <li>Stock: {{ $product->stock }}</li>
+                </ul>
             </div>
         </x-slot>
         <x-slot name="footer">

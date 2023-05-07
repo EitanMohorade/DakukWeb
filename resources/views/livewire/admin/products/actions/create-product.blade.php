@@ -12,6 +12,23 @@
                 <x-input type="text" class="w-full" wire:model.defer="name" />
                 <x-input-error for="name" />
             </div>
+
+            <div class="p-2">
+                <x-label value="Description" />
+                <x-input type="text" class="w-full" wire:model.defer="description" />
+                <x-input-error for="description" />
+            </div>
+
+            <div class="p-2">
+                <x-label value="Price" />
+                <x-input type="text" class="w-full" wire:model.defer="price" />
+                <x-input-error for="price" />
+            </div>
+            <div class="p-2">
+                <x-label value="Stock" />
+                <x-input type="text" class="w-full" wire:model.defer="stock" />
+                <x-input-error for="stock" />
+            </div>
         </x-slot>
         <x-slot name="footer">
             <div class="flex space-x-2 justify-end">
